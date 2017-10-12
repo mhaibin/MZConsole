@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Window size="260,71" caption="0,0,0,0" roundcorner="2,2,2,2" showshadow="true" shadowimage="material/general/shadow.png" shadowcorner="7,7,7,7">
+	<Default name="VScrollBar" value="showbutton1=&quot;false&quot; showbutton2=&quot;false&quot; width=&quot;7&quot; thumbnormalimage=&quot;file='material/general/scrollbar.png' source='14,0,21,39' corner='2,10,2,10'&quot; thumbhotimage=&quot;file='material/general/scrollbar.png' source='21,0,28,39' corner='2,10,2,10'&quot; thumbpushedimage=&quot;file='material/general/scrollbar.png' source='21,0,28,39' corner='2,10,2,10'&quot; bknormalimage=&quot;file='material/general/scrollbar.png' source='0,0,7,39' corner='2,10,2,10'&quot; bkhotimage=&quot;file='material/general/scrollbar.png' source='7,0,14,39' corner='2,10,2,10'&quot; bkpushedimage=&quot;file='material/general/scrollbar.png' source='7,0,14,39' corner='2,10,2,10'&quot;" />
+	<Font name="微软雅黑" size="12" bold="false" default="true" />
+	<Font name="微软雅黑" size="12" bold="false" />
+	<Font name="微软雅黑" size="14" bold="false" />
+	<VerticalLayout bkcolor="#FFFFFFFF">
+		<!-- 顶部 -->
+		<HorizontalLayout name="hor_title_top" height="39" bkcolor="#FFF5F5F5">
+			<Control width="14"/>
+			<Button name="btn_showwnd" text="明智管理端" width="38" height="38" normalimage="material/general/sys_close_normal.png" hotimage="material/general/sys_close_hot.png" pushedimage="material/general/sys_close_hot.png"/>
+		</HorizontalLayout>
+
+		<!--分割条-->
+		<Label name="Separator_line" height="1" bkcolor="#FFE5E5E5"/>
+
+		<!--水平边线-->
+		<Control height="1" bkcolor="#FFE5E4E4"/>
+		<HorizontalLayout name="hor_msg_reg" height="28" inset="10,5,10,5" >
+			<Control />
+			<Button name="btn_reg" width="60" font="1" text="明智注册验证" textcolor="#FF0DC88C" />
+		</HorizontalLayout>
+		<Control height="1" bkcolor="#FFE5E4E4"/>
+		<HorizontalLayout name="hor_msg_reg" height="28" inset="10,5,10,5" >
+			<Control />
+			<Button name="btn_opendir" width="60" font="1" text="打开所在目录" textcolor="#FF0DC88C" />
+		</HorizontalLayout>
+		<Control height="1" bkcolor="#FFE5E4E4"/>
+		<HorizontalLayout name="hor_exit" height="28" inset="10,5,10,5" >
+			<Control />
+			<Button name="btn_check_exit" width="60" font="1" text="退出" textcolor="#FF3ABE9D" />
+		</HorizontalLayout>
+	</VerticalLayout>
+</Window>

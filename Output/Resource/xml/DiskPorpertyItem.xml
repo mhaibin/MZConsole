@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Window >
+<!--<Default name="CheckBox" value="normalimage=&quot;file='material/cherkbox.png' source='0,0,15,15' dest='0,0,15,15'&quot; hotimage=&quot;file='material/cherkbox.png' source='0,15,15,30' dest='0,0,15,15'&quot; pushedimage=&quot;file='material/cherkbox.png' source='0,30,15,45' dest='0,0,15,15'&quot; selectedimage=&quot;file='material/cherkbox.png' source='0,45,15,60' dest='0,0,15,15'&quot;"/>-->
+	<Default name="Combo"  value="itemselectedbkcolor=&quot;#FF75B1FF&quot; itemtextpadding=&quot;5,0,0,0&quot; textcolor=&quot;#FFFF0000&quot; normalimage=&quot;file='material/general/comb.png' corner='5,5,5,5' source='0,0,97,22'&quot; hotimage=&quot;file='material/general/comb.png' corner='5,5,5,5' source='0,23,97,45'&quot; pushedimage=&quot;file='material/general/comb.png' corner='5,5,5,5' source='0,23,97,45'&quot;"/>
+	<ListContainerElement name="workstationitem" inset="2,2,2,2" height="27">
+		<HorizontalLayout>
+			<Label name="leb_diskname" height="20"/>
+		</HorizontalLayout>
+		<HorizontalLayout>
+			<Combo name="comb_servername" dropboxsize="0,130" height="20" textpadding="5,2,21,2" itemhottextcolor="#FFFFFFFF" itemhotbkcolor="#FFCAE1FF" itemtextpadding="5,0,0,0"  arrowwidth="21" normalarrow="material/general/down.png" droparrow="material/general/up.png">
+
+			</Combo>
+		</HorizontalLayout>
+		<HorizontalLayout >
+			<Combo name="comb_diskpath" dropboxsize="0,130" height="20" textpadding="5,2,21,2" itemhottextcolor="#FFFFFFFF" itemhotbkcolor="#FFCAE1FF" itemtextpadding="5,0,0,0"  arrowwidth="21" normalarrow="material/general/down.png" droparrow="material/general/up.png">
+			</Combo>
+		</HorizontalLayout>
+		<HorizontalLayout >
+			<Combo name="comb_diskmodel" dropboxsize="0,130" height="20" textpadding="5,2,21,2" itemhottextcolor="#FFFFFFFF" itemhotbkcolor="#FFCAE1FF" itemtextpadding="5,0,0,0"  arrowwidth="21" normalarrow="material/general/down.png" droparrow="material/general/up.png">
+				<ListLabelElement text="虚拟盘" selected="true" height="21" />
+				<ListLabelElement text="本地硬盘" height="21" />
+				<ListLabelElement text="仅用虚拟盘启动" height="21" />
+				<ListLabelElement text="必须从硬盘启动" height="21" />
+				<ListLabelElement text="本机BIOS(BBS)" height="21" />
+				<ListLabelElement text="复制虚拟盘到硬盘" height="21" />
+				<ListLabelElement text="复制硬盘到虚拟盘" height="21" />
+				<ListLabelElement text="本地硬盘缓存" height="21" />			
+			</Combo>
+		</HorizontalLayout>
+	</ListContainerElement>
+</Window>

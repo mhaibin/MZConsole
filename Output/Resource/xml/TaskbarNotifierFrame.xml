@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Window size="250,120"  roundcorner="2,2" showshadow="true" shadowimage="material/shadow.png" shadowcorner="7,7,7,7">
+	<Default name="VScrollBar" value="showbutton1=&quot;false&quot; showbutton2=&quot;false&quot; width=&quot;7&quot; thumbnormalimage=&quot;file='material/scrollbar.png' source='14,0,21,39' corner='2,10,2,10'&quot; thumbhotimage=&quot;file='material/scrollbar.png' source='21,0,28,39' corner='2,10,2,10'&quot; thumbpushedimage=&quot;file='material/scrollbar.png' source='21,0,28,39' corner='2,10,2,10'&quot; bknormalimage=&quot;file='material/scrollbar.png' source='0,0,7,39' corner='2,10,2,10'&quot; bkhotimage=&quot;file='material/scrollbar.png' source='7,0,14,39' corner='2,10,2,10'&quot; bkpushedimage=&quot;file='material/scrollbar.png' source='7,0,14,39' corner='2,10,2,10'&quot;" />
+	<Font name="宋体" size="13" bold="false" default="true" />  
+	<VerticalLayout bkcolor="#FFFFFFFF" hole="true">
+		<!--标题栏-->
+		<HorizontalLayout height ="39" bkcolor="#FFF5F5F5">
+			<Control width="14"/>
+			<Label name="label_title" text="MZD" align="left" valign="vcenter" autocalcwidth="true" font="2" textpadding="5,0,0,0" textcolor="#FF4C4C4C"/>
+			<Label name="label_title" text="MZD监控系统" align="left" valign="vcenter" autocalcwidth="true" font="3" textpadding="5,0,0,0" textcolor="#FF4C4C4C"/>
+			<Control />
+			<Button name="btn_close" width="38" height="38" normalimage="material/sys_close_normal.png" hotimage="material/sys_close_hot.png" pushedimage="material/sys_close_hot.png"/>
+		</HorizontalLayout>
+		<!--分割条-->
+		<Label height="1" bkcolor="#FFE5E5E5"/>	
+
+		<VerticalLayout inset="5,5,5,5">
+			<RichEdit name="rich_tip" readonly="true" wanttab="false" wantreturn="false" wantctrlreturn="false" mouse="false"/>
+		</VerticalLayout>
+	</VerticalLayout>
+</Window>

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Window>
+   <DuiMenuContainer interval="3" keyevent="true" windowxml="xml/MenuWindowDefault.xml">
+		<DuiMenu name="main_menu" major="true" width="130" height="130" bkimage="file='material/Menu/main_menu_bg.png' corner='35,5,5,5'" hole="ture" itemhottextcolor="#FFFFFFFF" itemhotbkcolor="#FF3ABE9D" itemshowhtml="true" roundcorner="5,5" showshadow="true" shadowsize="5" shadowposition="1,1" shadowcolor="#333333">
+			<DuiMenuElement command="traymenu_displaymainwnd"  text="{x 37}名智客户端" hottext="{x 37}名智客户端" height="28" />
+			<DuiMenuElement static="true" height = "5" inset="32,2,5,2">
+				<Control bkcolor="#FFEEEEEE" />
+			</DuiMenuElement>
+			<DuiMenuElement command="traymenu_reg" text="{x 37}名智注册检验" hottext="{x 37}名智注册检验" height="28"/>
+			<DuiMenuElement static="true" height = "5" inset="32,2,5,2">
+				<Control bkcolor="#FFEEEEEE" />
+			</DuiMenuElement>
+			<DuiMenuElement command="traymenu_opendir" text="{x 37}打开所在目录" hottext="{x 37}打开所在目录" height="28"/>
+			<DuiMenuElement static="true" height = "5" inset="32,2,5,2">
+				<Control bkcolor="#FFEEEEEE" />
+			</DuiMenuElement>
+			<DuiMenuElement command="traymenu_exit" text="{x 7}{i material/Menu/main_menu_exit_normal.png}{x 14}退出" hottext="{x 7}{i material/Menu/main_menu_exit_hot.png}{x 14}退出" height="28" />
+		</DuiMenu>
+
+	</DuiMenuContainer>
+</Window>

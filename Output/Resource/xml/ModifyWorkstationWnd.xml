@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window  size="620,510" caption="0,0,0,30" roundcorner="2,2,2,2" showshadow="true" shadowimage="material/general/shadow.png" shadowcorner="7,7,7,7">
+	<Font name="微软雅黑" size="12" bold="false" default="true" />
+	<Font name="微软雅黑" size="14" bold="false" />
+	<Default name="VScrollBar" value="showbutton1=&quot;false&quot; showbutton2=&quot;false&quot; width=&quot;7&quot; thumbnormalimage=&quot;file='material/general/scrollbarV.png' source='14,0,21,39' corner='2,10,2,10'&quot; thumbhotimage=&quot;file='material/general/scrollbarV.png' source='21,0,28,39' corner='2,10,2,10'&quot; thumbpushedimage=&quot;file='material/general/scrollbarV.png' source='21,0,28,39' corner='2,10,2,10'&quot; bknormalimage=&quot;file='material/general/scrollbarV.png' source='0,0,7,39' corner='2,10,2,10'&quot; bkhotimage=&quot;file='material/general/scrollbarV.png' source='7,0,14,39' corner='2,10,2,10'&quot; bkpushedimage=&quot;file='material/general/scrollbarV.png' source='7,0,14,39' corner='2,10,2,10'&quot;" />
+	<Default name="HScrollBar" value="showbutton1=&quot;false&quot; showbutton2=&quot;false&quot; height=&quot;7&quot; thumbnormalimage=&quot;file='material/general/scrollbar_2.png' source='0,14,39,21' corner='10,2,10,2'&quot; thumbhotimage=&quot;file=material/general/scrollbar_2.png''source='0,21,39,28' corner='10,2,10,2'&quot; thumbpushedimage=&quot;file='material/general/scrollbar_2.png' source='0,21,39,28' corner='10,2,10,2'&quot; bknormalimage=&quot;file='material/general/scrollbar_2.png' source='0,0,39,7' corner='10,2,10,2'&quot; bkhotimage=&quot;file='material/general/scrollbar_2.png' source='0,7,39,14' corner='10,2,10,2'&quot; bkpushedimage=&quot;file='material/general/scrollbar_2.png' source='0,7,39,14' corner='10,2,10,2'&quot;"/>
+	<Default name="Combo"  value="itemselectedbkcolor=&quot;#FF75B1FF&quot; itemtextpadding=&quot;5,0,0,0&quot; textcolor=&quot;#FFFF0000&quot; normalimage=&quot;file='material/general/comb.png' corner='5,5,5,5' source='0,0,97,22'&quot; hotimage=&quot;file='material/general/comb.png' corner='5,5,5,5' source='0,23,97,45'&quot; pushedimage=&quot;file='material/general/comb.png' corner='5,5,5,5' source='0,23,97,45'&quot;"/>
+	<Default name="Edit" value="normalimage=&quot;file='material/general/editbkimage.png' corner='5,5,5,5' source='0,0,107,30'&quot; hotimage=&quot;file='material/general/editbkimage.png' corner='5,5,5,5' source='0,31,107,61'&quot; pushedimage=&quot;file='material/general/editbkimage.png' corner='5,5,5,5' source='0,62,116,92'&quot; focusedimage=&quot;file='material/general/editbkimage.png' corner='5,5,5,5' source='0,62,116,92'&quot;"/>
+	<Default name="IPAddress" value="normalimage=&quot;file='material/general/editbkimage.png' corner='5,5,5,5' source='0,0,107,30'&quot; hotimage=&quot;file='material/general/editbkimage.png' corner='5,5,5,5' source='0,31,107,61'&quot; pushedimage=&quot;file='material/general/editbkimage.png' corner='5,5,5,5' source='0,62,116,92'&quot; focusedimage=&quot;file='material/general/editbkimage.png' corner='5,5,5,5' source='0,62,116,92'&quot;"/>
+	<Default name="EditComb" value="normalimage=&quot;file='material/general/editbkimage.png' corner='5,5,5,5' source='0,0,107,30'&quot; hotimage=&quot;file='material/general/editbkimage.png' corner='5,5,5,5' source='0,31,107,61'&quot; pushedimage=&quot;file='material/general/editbkimage.png' corner='5,5,5,5' source='0,62,116,92'&quot; focusedimage=&quot;file='material/general/editbkimage.png' corner='5,5,5,5' source='0,62,116,92'&quot;"/>
+	<Default name="CheckBox" value="normalimage=&quot;file='material/general/checkbox.png' source='0,0,15,15' dest='0,0,15,15'&quot; hotimage=&quot;file='material/general/checkbox.png' source='0,15,15,30' dest='0,0,15,15'&quot; pushedimage=&quot;file='material/general/checkbox.png' source='0,30,15,45' dest='0,0,15,15'&quot; selectedimage=&quot;file='material/general/checkbox.png' source='0,45,15,60' dest='0,0,15,15'&quot;"/>
+	<VerticalLayout bkcolor="#FFFFFFFF">
+		<!--标题栏-->
+		<HorizontalLayout height="30" bkcolor = "#FF313a47">
+			<Label name="title_name" text="修改工作站" width="300"  valign="top" textcolor="#FFE3E3E3" padding="12,2,0,0" font="1"/> 
+			<Control />
+			<Button name="minbtn" tooltip="最小化" width="30" height="30" normalimage="file='material/general/sys_min_normal.png'" hotimage="file='material/general/sys_min_hot.png'" pushedimage="file='material/general/sys_min_hot.png'"/>
+			<Control width="1"/>
+			<Button name="closebtn" tooltip="关闭" width="30" height="30" normalimage="file='material/general/sys_close_normal.png'" hotimage="file='material/general/sys_close_hot.png'" pushedimage="file='material/general/sys_close_hot.png'"  />
+		</HorizontalLayout>
+		<!--主体-->
+		<VerticalLayout bkcolor="#FFFFFFFF">
+			<HorizontalLayout height="150">
+				<!--左边-->
+				<HorizontalLayout width="310">
+				<!--左左-->
+					<VerticalLayout width="145" inset="5,0,0,0">
+						<Label name="lab_num" text="工作站编号" height="20"/>
+						<Edit name="edt_num" width="105" height="20" numberonly="true"/>
+						<Label name="lab_name" text="工作站名称" height="20"/>
+						<Edit name="edt_num" width="105" height="20"/>
+						<Label name="lab_mac" text="MAC" height="20"/>
+						<Edit name="edt_mac" width="105" height="20"/>
+					</VerticalLayout>
+					<Control width="10"/>
+					<!--左右-->
+					<VerticalLayout width="155">
+						<Label name="lab_pdi" text="分辨率" height="20"/>
+						<EditComb name="EdtComb_pdi" text="" width="130"  height="20" textpadding="1,2,1,2" textcolor="#FF080808" arrowwidth="21" normalarrow="material/general/down.png" droparrow="material/general/up.png"/>
+						<HorizontalLayout>
+							<VerticalLayout>
+								<Label name="lab_buffer" text="本地缓存" height="20"/>
+								<Combo name="comb_buffer" dropboxsize="0,130" width="75" height="20" textpadding="5,2,21,2" itemhottextcolor="#FFFFFFFF" itemhotbkcolor="#FF3ABE9D" itemtextpadding="5,0,0,0"  arrowwidth="21" normalarrow="material/general/down.png" droparrow="material/general/up.png"/>
+							</VerticalLayout>
+							<VerticalLayout>
+								<Label name="lab_delay" text="菜单延时" height="20"/>
+								<HorizontalLayout width="55">
+									<Edit name="edt_delay" width="40" height="20" numberonly="true"/>
+									<VerticalLayout width="15" height="20">
+										<Button name="btn_delay" width="15" height="9" normalimage="file='material/general/sys_config_btn.png' corner='1,1,1,1' source='0,0,64,25'" hotimage="file='material/general/sys_config_btn.png' corner='1,1,1,1' source='0,25,64,50'" pushedimage="file='material/general/sys_config_btn.png' corner='1,1,1,1' source='0,50,64,75'"/>
+										<Button name="btn_delay" width="15" height="9" normalimage="file='material/general/sys_config_btn.png' corner='1,1,1,1' source='0,0,64,25'" hotimage="file='material/general/sys_config_btn.png' corner='1,1,1,1' source='0,25,64,50'" pushedimage="file='material/general/sys_config_btn.png' corner='1,1,1,1' source='0,50,64,75'"/>
+									</VerticalLayout>
+								</HorizontalLayout>	
+							</VerticalLayout>
+						</HorizontalLayout>
+						<CheckBox  name="chb_autorestore" text="自动还原" padding="0,5,0,5" textpadding="10,0,0,0" width="100" height="15"/>
+					</VerticalLayout>
+				</HorizontalLayout>
+				<!--右边-->
+				<HorizontalLayout>
+					<!--右左-->
+					<VerticalLayout width="120">
+						<Label name="lab_startip" text="起始IP" height="20"/>
+						<IPAddress name="edt_startip" width="120" height="20" />
+						<Label name="lab_dnsi1" text="DNSI1" height="20"/>
+						<IPAddress name="edt_dnsi1" width="120" height="20" />
+						<Label name="lab_getway" text="网关" height="20"/>
+						<IPAddress name="edt_getway" width="120" height="20" />
+					</VerticalLayout>
+					<Control />
+					<!--右右-->
+					<VerticalLayout width="120">
+						<Label name="lab_mask" text="掩码" height="20"/>
+						<IPAddress name="edt_mask" width="120" height="20" />
+						<Label name="lab_dnsi2" text="DNSI2" height="20"/>
+						<IPAddress name="edt_dnsi2" width="120" height="20" />
+					</VerticalLayout>
+					<Control width="10"/>
+				</HorizontalLayout>
+			</HorizontalLayout>
+			
+			<!--列表-->
+			<VerticalLayout>
+				<TreeView name="tree_disk" bkcolor="#FFFFFFFF" itemtextcolor="#FF000000" itemhottextcolor="#FF000000" selitemtextcolor="#FF000000" itemhotbkcolor="#FFCAE1FF" itemselectedbkcolor="#FFC67171" vscrollbar="true">
+					<TreeNode name="nd_menu1" text="菜单1"  height="30" bordercolor="#FF6CA6CD" bordersize="1" bkcolor="#FFA4D3EE" itemattr="valign=&quot;vcenter&quot; textpadding=&quot;12,0,0,0&quot;" folderattr="padding=&quot;10,10,0,0&quot; width=&quot;10&quot; height=&quot;10&quot; normalimage=&quot;file='material/general/combox_pull_normal.png'&quot; selectedimage=&quot;file='material/general/combox_pull_hot.png'&quot;">
+						<TreeNode height="120">
+							<DiskInfoContactList name="lt_diskporperty" height="120" width="620" float="true" vscrollbar="true" hscrollbar="true" bordercolor="#FFCFCFCF" bordersize="2" bkcolor="#FFFFFFFF" itemtextcolor="#FF000000" itemselectedtextcolor="#FFFFFFFF" itemselectedbkcolor="#FFebebeb" itemhotbkcolor="#FFF2F2F2">
+								<ListHeader name="hd_diskporperty">
+									<ListHeaderItem text="磁盘名" width="120" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,0,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
+									<ListHeaderItem text="服务器名" width="130" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,0,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
+									<ListHeaderItem text="磁盘路径" width="225" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,0,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
+									<ListHeaderItem text="启动模式" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,0,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
+								</ListHeader>
+							</DiskInfoContactList>
+						</TreeNode>
+					</TreeNode>
+				</TreeView>
+			</VerticalLayout>
+		</VerticalLayout>
+	</VerticalLayout>
+</Window>

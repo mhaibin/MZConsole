@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window  size="620,510" caption="0,0,0,30" roundcorner="2,2,2,2" showshadow="true" shadowimage="material/general/shadow.png" shadowcorner="7,7,7,7">
+	<Font name="微软雅黑" size="12" bold="false" default="true" />
+	<Font name="微软雅黑" size="14" bold="false" />
+	<Default name="VScrollBar" value="showbutton1=&quot;false&quot; showbutton2=&quot;false&quot; width=&quot;7&quot; thumbnormalimage=&quot;file='material/general/scrollbarV.png' source='14,0,21,39' corner='2,10,2,10'&quot; thumbhotimage=&quot;file='material/general/scrollbarV.png' source='21,0,28,39' corner='2,10,2,10'&quot; thumbpushedimage=&quot;file='material/general/scrollbarV.png' source='21,0,28,39' corner='2,10,2,10'&quot; bknormalimage=&quot;file='material/general/scrollbarV.png' source='0,0,7,39' corner='2,10,2,10'&quot; bkhotimage=&quot;file='material/general/scrollbarV.png' source='7,0,14,39' corner='2,10,2,10'&quot; bkpushedimage=&quot;file='material/general/scrollbarV.png' source='7,0,14,39' corner='2,10,2,10'&quot;" />
+	<Default name="HScrollBar" value="showbutton1=&quot;false&quot; showbutton2=&quot;false&quot; height=&quot;7&quot; thumbnormalimage=&quot;file='material/general/scrollbar_2.png' source='0,14,39,21' corner='10,2,10,2'&quot; thumbhotimage=&quot;file=material/general/scrollbar_2.png''source='0,21,39,28' corner='10,2,10,2'&quot; thumbpushedimage=&quot;file='material/general/scrollbar_2.png' source='0,21,39,28' corner='10,2,10,2'&quot; bknormalimage=&quot;file='material/general/scrollbar_2.png' source='0,0,39,7' corner='10,2,10,2'&quot; bkhotimage=&quot;file='material/general/scrollbar_2.png' source='0,7,39,14' corner='10,2,10,2'&quot; bkpushedimage=&quot;file='material/general/scrollbar_2.png' source='0,7,39,14' corner='10,2,10,2'&quot;"/>
+	<Default name="Combo"  value="itemselectedbkcolor=&quot;#FF75B1FF&quot; itemtextpadding=&quot;5,0,0,0&quot; textcolor=&quot;#FFFF0000&quot; normalimage=&quot;file='material/general/comb.png' corner='5,5,5,5' source='0,0,97,22'&quot; hotimage=&quot;file='material/general/comb.png' corner='5,5,5,5' source='0,23,97,45'&quot; pushedimage=&quot;file='material/general/comb.png' corner='5,5,5,5' source='0,23,97,45'&quot;"/>
+	<Default name="Edit" value="normalimage=&quot;file='material/general/editbkimage.png' corner='5,5,5,5' source='0,0,107,30'&quot; hotimage=&quot;file='material/general/editbkimage.png' corner='5,5,5,5' source='0,31,107,61'&quot; pushedimage=&quot;file='material/general/editbkimage.png' corner='5,5,5,5' source='0,62,116,92'&quot; focusedimage=&quot;file='material/general/editbkimage.png' corner='5,5,5,5' source='0,62,116,92'&quot;"/>
+	<Default name="IPAddress" value="normalimage=&quot;file='material/general/editbkimage.png' corner='5,5,5,5' source='0,0,107,30'&quot; hotimage=&quot;file='material/general/editbkimage.png' corner='5,5,5,5' source='0,31,107,61'&quot; pushedimage=&quot;file='material/general/editbkimage.png' corner='5,5,5,5' source='0,62,116,92'&quot; focusedimage=&quot;file='material/general/editbkimage.png' corner='5,5,5,5' source='0,62,116,92'&quot;"/>
+	<Default name="EditComb" value="normalimage=&quot;file='material/general/editbkimage.png' corner='5,5,5,5' source='0,0,107,30'&quot; hotimage=&quot;file='material/general/editbkimage.png' corner='5,5,5,5' source='0,31,107,61'&quot; pushedimage=&quot;file='material/general/editbkimage.png' corner='5,5,5,5' source='0,62,116,92'&quot; focusedimage=&quot;file='material/general/editbkimage.png' corner='5,5,5,5' source='0,62,116,92'&quot;"/>
+	<Default name="CheckBox" value="normalimage=&quot;file='material/general/checkbox.png' source='0,0,15,15' dest='0,0,15,15'&quot; hotimage=&quot;file='material/general/checkbox.png' source='0,15,15,30' dest='0,0,15,15'&quot; pushedimage=&quot;file='material/general/checkbox.png' source='0,30,15,45' dest='0,0,15,15'&quot; selectedimage=&quot;file='material/general/checkbox.png' source='0,45,15,60' dest='0,0,15,15'&quot;"/>
+	<VerticalLayout bkcolor="#FFFFFFFF">
+		<!--标题栏-->
+		<HorizontalLayout height="30" bkcolor = "#FF313a47">
+			<Label name="title_name" text="新增服务器" width="300"  valign="top" textcolor="#FFE3E3E3" padding="12,2,0,0" font="1"/> 
+			<Control />
+			<Button name="minbtn" tooltip="最小化" width="30" height="30" normalimage="file='material/general/sys_min_normal.png'" hotimage="file='material/general/sys_min_hot.png'" pushedimage="file='material/general/sys_min_hot.png'"/>
+			<Control width="1"/>
+			<Button name="closebtn" tooltip="关闭" width="30" height="30" normalimage="file='material/general/sys_close_normal.png'" hotimage="file='material/general/sys_close_hot.png'" pushedimage="file='material/general/sys_close_hot.png'"  />
+		</HorizontalLayout>
+		<!--主体-->
+		<VerticalLayout bkcolor="#FFFFFFFF">
+			<HorizontalLayout height="445">
+				<!--左-->
+				<VerticalLayout width="180" >				
+					<HorizontalLayout width="180" height="20">
+						<IPAddress name="edt_ipfind" width="140" height="20" />
+						<Button name="btn_ipfind" text="查找" width="40" height="20" normalimage="file='material/general/sys_config_btn.png' corner='1,1,1,1' source='0,0,64,25'" hotimage="file='material/general/sys_config_btn.png' corner='1,1,1,1' source='0,25,64,50'" pushedimage="file='material/general/sys_config_btn.png' corner='1,1,1,1' source='0,50,64,75'"/>
+					</HorizontalLayout>
+					<Control height="1"/>
+					<ServerTree name="tree_serverip" multipleitem="true" bkcolor="#FFFFFFFF" bordersize="1" bordercolor="#FFCFCFCF" itemtextcolor="#FF000000" itemhottextcolor="#FF000000" selitemtextcolor="#FF000000" itemhotbkcolor="#FFCAE1FF" itemselectedbkcolor="#FFC67171" vscrollbar="true">
+
+					</ServerTree>
+				</VerticalLayout>
+				<Control width="10"/>
+				<!--右-->
+				<VerticalLayout >
+					<HorizontalLayout height="170">
+						<VerticalLayout width="150">
+							<Label name="lab_servername" text="服务器名称" height="20"/>
+							<Edit name="edt_servername" width="150" height="20" />
+							<Control height="10"/>
+							<Label name="lab_spareserver" text="备用服务器" height="20"/>
+							<Combo name="comb_spareserver" text="未使用" dropboxsize="0,130" width="150" height="20" textpadding="5,2,21,2" itemhottextcolor="#FFFFFFFF" itemhotbkcolor="#FF3ABE9D" itemtextpadding="5,0,0,0"  arrowwidth="21" normalarrow="material/general/down.png" droparrow="material/general/up.png"/>
+						</VerticalLayout>
+						<Control width="10"/>
+						<VerticalLayout width="150">
+							<Label name="lab_syssize" text="系统盘缓存大小(MB)" height="20"/>
+							<Edit name="edt_syssize" text="0" width="150" height="20" />
+							<Control height="5"/>
+							<Label name="lab_datasize" text="数据盘缓存大小(MB)" height="20"/>
+							<Edit name="edt_datasize" text="0" width="150" height="20" />
+							<Control height="5"/>
+							<Label name="lab_ssdsize" text="SSD缓存大小(MB)" height="20"/>
+							<Edit name="edt_ssdsize" text="0" width="150" height="20" />
+						</VerticalLayout>
+					</HorizontalLayout>
+					<Control height="10"/>
+					<VerticalLayout>
+						<Label name="lab_rwritepath" text="回写路径(盘符:\Wks)" height="20"/>
+						<HorizontalLayout>
+							<CheckBox  name="chb_disk1" text="" padding="0,5,0,5" visible="false" textpadding="10,0,0,0" width="60" height="15"/>
+							<Control width="10"/>
+							<CheckBox  name="chb_disk2" text="" padding="0,5,0,5" visible="false" textpadding="10,0,0,0" width="60" height="15"/>
+							<Control width="10"/>
+							<CheckBox  name="chb_disk3" text="" padding="0,5,0,5" visible="false" textpadding="10,0,0,0" width="60" height="15"/>
+							<Control width="10"/>
+							<CheckBox  name="chb_disk4" text="" padding="0,5,0,5" visible="false" textpadding="10,0,0,0" width="60" height="15"/>
+						</HorizontalLayout>
+					</VerticalLayout>
+				</VerticalLayout>
+			</HorizontalLayout>
+			
+			<HorizontalLayout height="20">
+				<Control />
+				<Button name="btn_apply" text="应用" width="60" height="20" normalimage="file='material/general/sys_config_btn.png' corner='1,1,1,1' source='0,0,64,25'" hotimage="file='material/general/sys_config_btn.png' corner='1,1,1,1' source='0,25,64,50'" pushedimage="file='material/general/sys_config_btn.png' corner='1,1,1,1' source='0,50,64,75'"/>
+				<Control width="10"/>
+			</HorizontalLayout>
+			<Control height="10"/>
+		</VerticalLayout>
+	</VerticalLayout>
+</Window>

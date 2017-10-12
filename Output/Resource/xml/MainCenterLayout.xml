@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<VerticalLayout >
+		<!--工作站管理-->
+		<VerticalLayout inset="0,0,0,0" name="ver_workstationMgr_bar" visible="true">
+			<WorkstationLayout name="ly_workstationMgr"/>
+		</VerticalLayout>
+		<!--服务器管理-->
+		<VerticalLayout inset="0,0,0,0" name="ver_serverMgr_bar" visible="false">
+			<ServerLayout name="ly_serverMgr"/>
+		</VerticalLayout>
+		<!--磁盘维护-->
+		<VerticalLayout inset="0,0,0,0" name="ver_diskMt_bar" visible="false">
+			<DiskMtLayout name="ly_diskMt"/>
+		</VerticalLayout>
+		<!--进程外窗口-->
+		<VerticalLayout inset="0,0,0,0" name="ver_OutsideProcess_bar" visible="false">
+			<OutsideProcLayout name="ly_outsideProc"/>
+		</VerticalLayout>
+		<!--参数设置窗口-->
+		<VerticalLayout inset="0,0,0,0" name="ver_ParamSet_bar" visible="false">
+			<ParamSetLayout name="ly_paramset"/>
+		</VerticalLayout>
+	</VerticalLayout>
+</Window>

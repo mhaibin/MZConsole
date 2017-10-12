@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Window size="1025,740" caption="0,0,0,100" mininfo="1025,750" sizebox="4,4,4,4" roundcorner="2,2,2,2" showshadow="true" shadowimage="material/general/shadow.png" shadowcorner="7,7,7,7">
+	<Font name="微软雅黑" size="12" bold="false" default="true" />
+	<Font name="微软雅黑" size="14" bold="false"/>
+	<Font name="微软雅黑" size="11" bold="false"/>
+	<Default name="VScrollBar" value="showbutton1=&quot;false&quot; showbutton2=&quot;false&quot; width=&quot;7&quot; thumbnormalimage=&quot;file='material/general/scrollbar.png' source='14,0,21,39' corner='2,10,2,10'&quot; thumbhotimage=&quot;file='material/general/scrollbar.png' source='21,0,28,39' corner='2,10,2,10'&quot; thumbpushedimage=&quot;file='material/general/scrollbar.png' source='21,0,28,39' corner='2,10,2,10'&quot; bknormalimage=&quot;file='material/general/scrollbar.png' source='0,0,7,39' corner='2,10,2,10'&quot; bkhotimage=&quot;file='material/general/scrollbar.png' source='7,0,14,39' corner='2,10,2,10'&quot; bkpushedimage=&quot;file='material/general/scrollbar.png' source='7,0,14,39' corner='2,10,2,10'&quot;" />
+	<VerticalLayout bkcolor="#FFFFFFFF">
+		<!--标题栏-->
+		<HorizontalLayout height="30" bkcolor = "#FF313a47">
+			<Label name="title_icon" width="24" height="24" padding="5,3,0,0" bkimage="file='material/general/logo.png'"/>
+			<Label name="title_name" text="名智管理系统" width="300"  valign="top" textcolor="#FFE3E3E3" padding="12,2,0,0" font="1"/> 
+			<Control />
+			<Button name="minbtn" tooltip="最小化" width="30" height="30" normalimage="file='material/general/sys_min_normal.png'" hotimage="file='material/general/sys_min_hot.png'" pushedimage="file='material/general/sys_min_hot.png'"/>
+			<Control width="1"/>
+			<Button name="maxbtn" tooltip="最大化" width="30" height="30" normalimage="file='material/general/sys_max_normal.png'" hotimage="material/general/sys_max_hot.png" pushedimage="material/general/sys_max_hot.png"  />
+			<Button name="restorebtn" tooltip="还原" visible="false" width="30" height="30" normalimage="file='material/general/sys_restore_normal.png'" hotimage="material/general/sys_restore_hot.png" pushedimage="material/general/sys_restore_hot.png"  />
+			<Control width="1"/>
+			<Button name="closebtn" tooltip="关闭" width="30" height="30" normalimage="file='material/general/sys_close_normal.png'" hotimage="file='material/general/sys_close_hot.png'" pushedimage="file='material/general/sys_close_hot.png'"  />
+		</HorizontalLayout>
+		
+		<!--主体-->
+		<VerticalLayout bkcolor="#FFFFFFFF" hole="true">
+			<!--顶部工具栏-->
+			<HorizontalLayout height="74">
+				<TopMenu name="hlayout_topToolBar" height="74" bkcolor="#FF313a47" />
+
+				<VerticalLayout bkcolor="#FF313a47" width="300">
+					<Label name="lab_netbarname" text="网吧名称:" height="13" font="2" textcolor="#FFFFFFFF" showhtml="true"/>
+					<Label name="lab_regdisknum" text="硬盘序列号:" height="13" font="2" textcolor="#FFFFFFFF" showhtml="true"/>
+					<Label name="lab_regsize" text="注册台数:" height="13" font="2" textcolor="#FFFFFFFF" showhtml="true"/>
+					<Label name="lab_regvalidity" text="到期时间:" height="13" font="2" textcolor="#FFFFFFFF" showhtml="true"/>
+					<Label name="lab_regpass" text="通行证:" height="13" font="2" textcolor="#FFFFFFFF" showhtml="true"/>
+				</VerticalLayout>
+			</HorizontalLayout>
+			<!--中心显示区域-->
+			
+			<CenterView name="center_layout" inset="0,0,0,0" xmlfile="xml/MainCenterLayout.xml"/>
+			
+		</VerticalLayout>
+	</VerticalLayout>
+</Window>

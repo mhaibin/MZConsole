@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Window >
+<!--<Default name="CheckBox" value="normalimage=&quot;file='material/cherkbox.png' source='0,0,15,15' dest='0,0,15,15'&quot; hotimage=&quot;file='material/cherkbox.png' source='0,15,15,30' dest='0,0,15,15'&quot; pushedimage=&quot;file='material/cherkbox.png' source='0,30,15,45' dest='0,0,15,15'&quot; selectedimage=&quot;file='material/cherkbox.png' source='0,45,15,60' dest='0,0,15,15'&quot;"/>-->
+	<ListContainerElement name="serveritem" inset="2,2,2,2" height="27">
+		<HorizontalLayout>
+			<Label name="lab_icon" height="16" width="16" padding="0,5,0,0"/>
+			<Label name="lab_name" height="25" padding="5,0,0,0"/>
+		</HorizontalLayout>
+		<HorizontalLayout>
+			<Label name="lab_ip" height="25"/>
+		</HorizontalLayout>
+		<HorizontalLayout>
+			<Label name="lab_wtpath" height="25"/>
+		</HorizontalLayout>
+		<HorizontalLayout>
+			<Label name="lab_buffparam" height="25"/>
+		</HorizontalLayout>
+		<HorizontalLayout >
+			<Label name="lab_spname" height="25"/>
+		</HorizontalLayout>
+	</ListContainerElement>
+</Window>

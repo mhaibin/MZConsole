@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window >
+	<Font name="微软雅黑" size="12" bold="false" default="true" />
+	<Font name="微软雅黑" size="14" bold="false" />
+	<Default name="VScrollBar" value="showbutton1=&quot;false&quot; showbutton2=&quot;false&quot; width=&quot;7&quot; thumbnormalimage=&quot;file='material/general/scrollbarV.png' source='14,0,21,39' corner='2,10,2,10'&quot; thumbhotimage=&quot;file='material/general/scrollbarV.png' source='21,0,28,39' corner='2,10,2,10'&quot; thumbpushedimage=&quot;file='material/general/scrollbarV.png' source='21,0,28,39' corner='2,10,2,10'&quot; bknormalimage=&quot;file='material/general/scrollbarV.png' source='0,0,7,39' corner='2,10,2,10'&quot; bkhotimage=&quot;file='material/general/scrollbarV.png' source='7,0,14,39' corner='2,10,2,10'&quot; bkpushedimage=&quot;file='material/general/scrollbarV.png' source='7,0,14,39' corner='2,10,2,10'&quot;" />
+	<Default name="HScrollBar" value="showbutton1=&quot;false&quot; showbutton2=&quot;false&quot; height=&quot;7&quot; thumbnormalimage=&quot;file='material/general/scrollbarH.png' source='0,14,39,21' corner='10,2,10,2'&quot; thumbhotimage=&quot;file=material/general/scrollbarH.png''source='0,21,39,28' corner='10,2,10,2'&quot; thumbpushedimage=&quot;file='material/general/scrollbarH.png' source='0,21,39,28' corner='10,2,10,2'&quot; bknormalimage=&quot;file='material/general/scrollbarH.png' source='0,0,39,7' corner='10,2,10,2'&quot; bkhotimage=&quot;file='material/general/scrollbarH.png' source='0,7,39,14' corner='10,2,10,2'&quot; bkpushedimage=&quot;file='material/general/scrollbarH.png' source='0,7,39,14' corner='10,2,10,2'&quot;"/>
+	<Default name="Combo"  value="itemselectedbkcolor=&quot;#FF75B1FF&quot; itemtextpadding=&quot;5,0,0,0&quot; textcolor=&quot;#FFFF0000&quot; normalimage=&quot;file='material/general/comb.png' corner='5,5,5,5' source='0,0,97,22'&quot; hotimage=&quot;file='material/general/comb.png' corner='5,5,5,5' source='0,23,97,45'&quot; pushedimage=&quot;file='material/general/comb.png' corner='5,5,5,5' source='0,23,97,45'&quot;"/>
+	<Default name="CheckBox" value="normalimage=&quot;file='material/general/checkbox.png' source='0,0,15,15' dest='0,0,15,15'&quot; hotimage=&quot;file='material/general/checkbox.png' source='0,15,15,30' dest='0,0,15,15'&quot; pushedimage=&quot;file='material/general/checkbox.png' source='0,30,15,45' dest='0,0,15,15'&quot; selectedimage=&quot;file='material/general/checkbox.png' source='0,45,15,60' dest='0,0,15,15'&quot;"/>
+	<VerticalLayout hole="true">
+		<HorizontalLayout >
+			<!--左边的列表-->
+			<VerticalLayout width="150">
+				<ServerTree name="tree_WSLeft" multipleitem="true" bkcolor="#FFFFFFFF" itemtextcolor="#FF000000" itemhottextcolor="#FF000000" selitemtextcolor="#FF000000" itemhotbkcolor="#FFF2F2F2" itemselectedbkcolor="#FFCAE1FF" vscrollbar="true">
+
+				</ServerTree>
+			</VerticalLayout>
+			<!--右边布局-->
+			<VerticalLayout>
+				<HorizontalLayout bkcolor="#FFFFFFFF" height="25">
+					<FrontButton name="bt_add" text="增 加" width="75" frontWidth="16" frontHeight="16" frontOffsetX="5" frontOffsetY="5" normalimage="file='material/general/editbkimage.png' source='0,0,107,30'" hotimage="file='material/general/editbkimage.png' source='0,31,107,61'" frontimage="material/listbtn/add.png"/>
+					<FrontButton name="bt_mdi" text="修 改" width="75" frontWidth="16" frontHeight="16" frontOffsetX="5" frontOffsetY="5" normalimage="file='material/general/editbkimage.png' source='0,0,107,30'" hotimage="file='material/general/editbkimage.png' source='0,31,107,61'" frontimage="material/listbtn/modify.png"/>
+					<FrontButton name="bt_del" text="删 除" width="75" frontWidth="16" frontHeight="16" frontOffsetX="5" frontOffsetY="5" normalimage="file='material/general/editbkimage.png' source='0,0,107,30'" hotimage="file='material/general/editbkimage.png' source='0,31,107,61'" frontimage="material/listbtn/del.png"/>
+					<FrontButton name="bt_dis" text="禁 用" width="75" frontWidth="16" frontHeight="16" frontOffsetX="5" frontOffsetY="5" normalimage="file='material/general/editbkimage.png' source='0,0,107,30'" hotimage="file='material/general/editbkimage.png' source='0,31,107,61'" frontimage="material/listbtn/disable.png"/>
+					<FrontButton name="bt_str" text="启 用" width="75" frontWidth="16" frontHeight="16" frontOffsetX="5" frontOffsetY="5" normalimage="file='material/general/editbkimage.png' source='0,0,107,30'" hotimage="file='material/general/editbkimage.png' source='0,31,107,61'" frontimage="material/listbtn/enable.png"/>
+					<FrontButton name="bt_reb" text="重 启" width="75" frontWidth="16" frontHeight="16" frontOffsetX="5" frontOffsetY="5" normalimage="file='material/general/editbkimage.png' source='0,0,107,30'" hotimage="file='material/general/editbkimage.png' source='0,31,107,61'" frontimage="material/listbtn/start.png"/>
+					<FrontButton name="bt_shd" text="关 机" width="75" frontWidth="16" frontHeight="16" frontOffsetX="5" frontOffsetY="5" normalimage="file='material/general/editbkimage.png' source='0,0,107,30'" hotimage="file='material/general/editbkimage.png' source='0,31,107,61'" frontimage="material/listbtn/power.png"/>
+					<FrontButton name="bt_grp" text="设置分组" width="85" frontWidth="16" frontHeight="16" frontOffsetX="0" frontOffsetY="5" normalimage="file='material/general/editbkimage.png' source='0,0,107,30'" hotimage="file='material/general/editbkimage.png' source='0,31,107,61'" frontimage="material/listbtn/group.png"/>
+					<FrontButton name="bt_sup" text="开超管" width="95" frontWidth="16" frontHeight="16" frontOffsetX="2" frontOffsetY="5" normalimage="file='material/general/editbkimage.png' source='0,0,107,30'" hotimage="file='material/general/editbkimage.png' source='0,31,107,61'" frontimage="material/listbtn/super01.png"/>
+					<CheckBox  name="chb_autoadd" text="自动添加工作站" padding="0,5,0,5" textpadding="10,0,0,0" width="100" height="15"/>
+				</HorizontalLayout><!--WorkstationContactList-->
+				<WorkstationContactList name="lt_workstation" vscrollbar="true" hscrollbar="true" multiselect="true" itemlinecolor="#FFCFCFCF" itemendellipsis="true" bordercolor="#FFCFCFCF" bordersize="2,2,2,2" bkcolor="#FFFFFFFF" itemtextcolor="#FF000000" itemselectedtextcolor="#FFFFFFFF" itemselectedbkcolor="#FFCAE1FF" itemhotbkcolor="#FFF2F2F2">
+					<ListHeader name="hd_workstation" >
+						<ListHeaderItem text="编号" width="60" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,3,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
+						<ListHeaderItem text="计算机名" width="80" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,3,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
+						<ListHeaderItem text="MAC" width="80" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,3,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
+						<ListHeaderItem text="工作站IP" width="100" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,3,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
+						<ListHeaderItem text="保护状态" width="60" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,3,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
+						<ListHeaderItem text="缓存大小" width="60" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,3,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
+						<ListHeaderItem text="主镜像IP" width="100" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,3,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
+						<ListHeaderItem text="当前主镜像文件" width="200" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,3,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
+						<ListHeaderItem text="回写目录" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,3,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
+					</ListHeader>
+				</WorkstationContactList>
+			</VerticalLayout>
+		</HorizontalLayout>
+		<!--状态栏-->
+		<HorizontalLayout height="25" bkcolor="#FF425163" bordercolor="#FF313a47" bordersize="0,1,0,1">
+			<Label name="lab_Status" text="系统状态" width="55" padding="5,0,0,0" textcolor="#FFCCCCCC"/>
+			<VerticalLayout width="2">
+				<Control height="5"/>
+				<Control width="2" bkcolor="#FF313a47"/>
+				<Control height="5"/>
+			</VerticalLayout>
+			<Control width="5"/>
+			<Label name="lab_AllSize" text="工作站台数：" width="100" textcolor="#FFCCCCCC" showhtml="true"/>
+			<VerticalLayout width="2">
+				<Control height="5"/>
+				<Control width="2" bkcolor="#FF313a47"/>
+				<Control height="5"/>
+			</VerticalLayout>
+			<Control width="5"/>
+			<Label name="lab_onlineSize" text="在线台数：" width="85" textcolor="#FFCCCCCC" showhtml="true"/>
+			<VerticalLayout width="2">
+				<Control height="5"/>
+				<Control width="2" bkcolor="#FF313a47"/>
+				<Control height="5"/>
+			</VerticalLayout>
+			<Control width="5"/>
+			<Label name="lab_superMarNum" text="超管编号：" width="100" textcolor="#FFCCCCCC" showhtml="true"/>
+			<Control />
+			<Label name="lab_statusicon" height="16" width="16" padding="0,5,0,0" bkimage=""/>
+			<Label name="lab_start" text="MZD服务已启动" textcolor="#FFCCCCCC" autocalcwidth="true"/>
+			<Control width="10"/>
+		</HorizontalLayout>
+	</VerticalLayout>
+</Window>

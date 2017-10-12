@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Window roundcorner="3,3" showshadow="true" shadowimage="material/general/shadow.png" shadowcorner="7,7,7,7">
+   <Font name="微软雅黑" size="12" bold="false" default="true" />
+   <Default name="DuiMenu" value="hole=&quot;ture&quot; inset=&quot;1,1,1,1&quot; itemhottextcolor=&quot;#FFFFFFFF&quot; itemhotbkcolor=&quot;#FF313a47&quot; itemshowhtml=&quot;true&quot;"  />
+</Window>

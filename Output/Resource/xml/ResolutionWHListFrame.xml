@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Font name="微软雅黑" size="12" bold="false" default="true" />
+	<Default name="VScrollBar" value="showbutton1=&quot;false&quot; showbutton2=&quot;false&quot; width=&quot;7&quot; thumbnormalimage=&quot;file='material/scrollbar.png' source='14,0,21,39' corner='2,10,2,10'&quot; thumbhotimage=&quot;file='material/scrollbar.png' source='21,0,28,39' corner='2,10,2,10'&quot; thumbpushedimage=&quot;file='material/scrollbar.png' source='21,0,28,39' corner='2,10,2,10'&quot; bknormalimage=&quot;file='material/scrollbar.png' source='0,0,7,39' corner='2,10,2,10'&quot; bkhotimage=&quot;file='material/scrollbar.png' source='7,0,14,39' corner='2,10,2,10'&quot; bkpushedimage=&quot;file='material/scrollbar.png' source='7,0,14,39' corner='2,10,2,10'&quot;" />
+	<VerticalLayout name="ver_layout" bkcolor="#FFFFFFFF" hole="true" inset="1,1,1,1" bordercolor="#FFCAE1FF" bordersize="1" vscrollbar="true">
+		
+	</VerticalLayout>
+</Window>

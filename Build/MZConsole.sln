@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MZConsole", "..\Main\MZConsole.vcproj", "{9B77D0BE-FE55-47B3-88C1-841F94CD8421}"
+	ProjectSection(ProjectDependencies) = postProject
+		{78364AA2-A5C1-4628-A908-A2ADEC32A14F} = {78364AA2-A5C1-4628-A908-A2ADEC32A14F}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DuiLib", "..\DirectUI\DuiLib.vcproj", "{78364AA2-A5C1-4628-A908-A2ADEC32A14F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9B77D0BE-FE55-47B3-88C1-841F94CD8421}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9B77D0BE-FE55-47B3-88C1-841F94CD8421}.Debug|Win32.Build.0 = Debug|Win32
+		{9B77D0BE-FE55-47B3-88C1-841F94CD8421}.Release|Win32.ActiveCfg = Release|Win32
+		{9B77D0BE-FE55-47B3-88C1-841F94CD8421}.Release|Win32.Build.0 = Release|Win32
+		{78364AA2-A5C1-4628-A908-A2ADEC32A14F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{78364AA2-A5C1-4628-A908-A2ADEC32A14F}.Debug|Win32.Build.0 = Debug|Win32
+		{78364AA2-A5C1-4628-A908-A2ADEC32A14F}.Release|Win32.ActiveCfg = Release|Win32
+		{78364AA2-A5C1-4628-A908-A2ADEC32A14F}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

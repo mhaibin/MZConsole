@@ -1,0 +1,64 @@
+body{font-size:9px; margin::0px; padding::0px; }
+form{padding:0px;margin:0px;}
+A:link { COLOR: #0000FF; TEXT-DECORATION: none;}
+A:visited { COLOR: #0000FF; TEXT-DECORATION: none}
+A:active  { COLOR: #3333ff; TEXT-DECORATION: none}
+A:hover   { COLOR: #ff0000; TEXT-DECORATION: none}
+.TableData   { BACKGROUND: #FFFFFF;COLOR:#000000;}
+/*  block型表格样式  */
+.TableBlock{
+   border:1px #8FABC1 solid;
+   line-height:20px;
+   font-size:9pt;
+   border-collapse:collapse;
+}
+.TableBlock td{
+   padding:3px;
+   color:#000000;
+}
+.TableBlock .TableHeader td,
+.TableBlock td.TableHeader{
+   background:url("list_hd_bg.gif");
+   border:1px #8FABC1 solid;
+   font-weight:bold;
+   color:#476074;
+   line-height:23px;
+   padding:0px;
+}
+.TableBlock .TableLine1 td,
+.TableBlock td.TableLine1{
+   background:#F8F8F8;
+   border-top:1px #8FABC1 solid;
+   border-right:1px #8FABC1 solid;
+}
+.TableBlock .TableLine2 td,
+.TableBlock td.TableLine2{
+   background:#FFFFFF;
+   border-top:1px #8FABC1 solid;
+   border-right:1px #8FABC1 solid;
+}
+.TableBlock .TableData td,
+.TableBlock td.TableData{
+   background:#FFFFFF;
+   border-top:1px #8FABC1 solid;
+   border-right:1px #8FABC1 solid;
+}
+.TableBlock .TableContent td,
+.TableBlock td.TableContent{
+   background:#F0F0F0;
+   border-top:1px #8FABC1 solid;
+   border-right:1px #8FABC1 solid;
+}
+.TableBlock .TableFooter td,
+.TableBlock .TableControl td,
+.TableBlock td.TableFooter,
+.TableBlock td.TableControl{
+   background: #CCD8E2;
+   border:1px #8FABC1 solid;
+}
+.TableBlock .TableRed td,
+.TableBlock td.TableRed
+{
+   background:#FFEBEB;
+}
+ 

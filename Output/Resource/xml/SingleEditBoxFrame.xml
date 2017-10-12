@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window size="348,180" maxinfo="348,180" caption="0,0,0,38" roundcorner="2,2,2,2" showshadow="true" shadowimage="material/general/shadow.png" shadowcorner="7,7,7,7">
+	<Font name="微软雅黑" size="12" bold="false" default="true" />
+	<Font name="微软雅黑" size="14" bold="false"/>
+	<VerticalLayout bkcolor="#FFFFFFFF" hole="true">
+		<!--标题-->
+		<HorizontalLayout bkcolor="#FFF5F5F5" height="39">
+			<!--<Label name ="lable_logo"  bkimage = "" width = "30" height = "30" padding="6,2,0,0"/>-->
+			<Control width="14" />
+			<Label name="label_title" font="1" autocalcwidth="true" textcolor="#FF4C4C4C"/>
+			<Control />
+			<Button name="btn_close" width="38" height="38" normalimage="material/general/sys_close_normal.png" hotimage="material/general/sys_close_hot.png" pushedimage="material/general/sys_close_hot.png"/>
+		</HorizontalLayout>
+
+		<!--分隔符-->
+		<Label name="Separator_line" height="1" bkcolor="#FFE5E5E5"/>
+		
+		<Control height="20"/>
+		
+		<VerticalLayout bkcolor="#FFFFFFFF" height="70" inset="30,0,0,0">
+			<Label name="label_name" font="0" height="20" textcolor="#FF000000"/>
+			<Edit name="edit_content" font="0" width="260" height="28" bordercolor="#FF999999" bordersize="1" textcolor="#FF000000"/>
+			<Control height="2"/>
+			<Label name="label_tips" textcolor="#FFF55C2D" height="20" showhtml="true"/>
+		</VerticalLayout>
+		
+		<Control />
+		
+		<HorizontalLayout bkcolor="#FFFFFFFF" height="30">
+			<Control />
+			<Button name="btn_ok" text="确认" width="80" textcolor="#FFFFFFFF" normalimage="file='material/general/btn_ok.png' corner='5,5,5,5' source='0,0,70,28'" hotimage="file='material/general/btn_ok.png' corner='5,5,5,5' source='0,28,70,56'" pushedimage="file='material/general/btn_ok.png' corner='5,5,5,5' source='0,56,70,84'"  />
+			<Control width="12"/>
+			<Button name="btn_close" text="取消" width="80" textcolor="#FF000000" normalimage="file='material/general/button_cancel.png' corner='5,5,5,5' source='0,0,80,31'" hotimage="file='material/general/button_cancel.png' corner='5,5,5,5' source='0,33,80,64'" pushedimage="file='material/general/button_cancel.png' corner='5,5,5,5' source='0,65,80,96'" />
+			<Control width="20"/>
+		</HorizontalLayout>
+		
+		<Control height="10"/>
+	</VerticalLayout>
+</Window>

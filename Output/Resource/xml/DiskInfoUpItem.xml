@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Window >
+<!--<Default name="CheckBox" value="normalimage=&quot;file='material/cherkbox.png' source='0,0,15,15' dest='0,0,15,15'&quot; hotimage=&quot;file='material/cherkbox.png' source='0,15,15,30' dest='0,0,15,15'&quot; pushedimage=&quot;file='material/cherkbox.png' source='0,30,15,45' dest='0,0,15,15'&quot; selectedimage=&quot;file='material/cherkbox.png' source='0,45,15,60' dest='0,0,15,15'&quot;"/>-->
+	<ListContainerElement name="diskinfoupitem" inset="2,2,2,2" height="27">
+		<HorizontalLayout >
+			<Label name="lab_name" height="25" padding="3,0,0,0"/>
+		</HorizontalLayout>
+		<HorizontalLayout >
+			<Label name="lab_dspath" height="25"/>
+		</HorizontalLayout>
+		<HorizontalLayout >
+			<Label name="lab_dsformat" height="25"/>
+		</HorizontalLayout>
+		<HorizontalLayout >
+			<Label name="lab_dssize" height="25"/>
+		</HorizontalLayout>
+		<HorizontalLayout >
+			<Label name="lab_mdtime" height="25"/>
+		</HorizontalLayout >
+		<HorizontalLayout >
+			<Label name="lab_remark" height="25"/>
+		</HorizontalLayout>
+	</ListContainerElement>
+</Window>

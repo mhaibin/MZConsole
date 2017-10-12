@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Window>
+     <DuiMenuContainer interval="10" keyevent="true" windowxml="xml/MenuWindowDefault.xml">
+		<DuiMenu name="workstationlist_menu" major="true" width="130" height="85" bkimage="" bkcolor="#FFFFFFFF" hole="ture" itemhottextcolor="#FFFFFFFF" itemhotbkcolor="#FF3ABE9D" itemshowhtml="true" roundcorner="5,5" showshadow="true" shadowsize="5" shadowposition="1,1" shadowcolor="#333333">
+			<DuiMenuElement name  = "Wakeup" command="wakeup" text="{x 36}唤醒" hottext="{x 36}唤醒" height = "28"/>
+			<DuiMenuElement name  = "clear_mac" command="clearmac" text="{x 36}清除MAC" hottext="{x 36}清除MAC" height = "28"/>
+			<DuiMenuElement name  = "group_set" command="groupset" bkimage="material/general/ExpendMenu.png" extendmenu="extend_groupset_menu" text="{x 36}应用配置" hottext="{x 36}应用配置" height = "28"/>
+		</DuiMenu>
+		<DuiMenu name="extend_groupset_menu" width="120" bkcolor="#FFFFFFFF" hole="false" itemhottextcolor="#FFFFFFFF" itemhotbkcolor="#FF3ABE9D" itemshowhtml="true" roundcorner="3,3" showshadow="true" shadowsize="5" shadowposition="1,1" shadowcolor="#333333">
+		</DuiMenu>
+	</DuiMenuContainer>
+</Window>

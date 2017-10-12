@@ -1,0 +1,18 @@
+// MZConsole.idl : MZConsole 的 IDL 源
+//
+
+// 此文件将由 MIDL 工具处理以
+// 产生类型库(MZConsole.tlb)和封送处理代码。
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	uuid(48AFEAC9-460A-4E71-8D24-1D223324E735),
+	version(1.0),
+	helpstring("MZConsole 1.0 类型库")
+]
+library MZConsoleLib
+{
+	importlib("stdole2.tlb");
+};

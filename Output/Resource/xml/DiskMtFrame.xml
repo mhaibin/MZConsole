@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+	<Font name="微软雅黑" size="12" bold="false" default="true" />
+	<Font name="微软雅黑" size="14" bold="false" />
+	<Default name="VScrollBar" value="showbutton1=&quot;false&quot; showbutton2=&quot;false&quot; width=&quot;7&quot; thumbnormalimage=&quot;file='material/general/scrollbar.png' source='14,0,21,39' corner='2,10,2,10'&quot; thumbhotimage=&quot;file='material/general/scrollbar.png' source='21,0,28,39' corner='2,10,2,10'&quot; thumbpushedimage=&quot;file='material/general/scrollbar.png' source='21,0,28,39' corner='2,10,2,10'&quot; bknormalimage=&quot;file='material/general/scrollbar.png' source='0,0,7,39' corner='2,10,2,10'&quot; bkhotimage=&quot;file='material/general/scrollbar.png' source='7,0,14,39' corner='2,10,2,10'&quot; bkpushedimage=&quot;file='material/general/scrollbar.png' source='7,0,14,39' corner='2,10,2,10'&quot;" />
+	<Default name="Combo"  value="itemselectedbkcolor=&quot;#FF75B1FF&quot; itemtextpadding=&quot;5,0,0,0&quot; textcolor=&quot;#FFFF0000&quot; normalimage=&quot;file='material/general/comb.png' corner='5,5,5,5' source='0,0,97,22'&quot; hotimage=&quot;file='material/general/comb.png' corner='5,5,5,5' source='0,23,97,45'&quot; pushedimage=&quot;file='material/general/comb.png' corner='5,5,5,5' source='0,23,97,45'&quot;"/>
+	<HorizontalLayout hole="true">
+		<!--左边的列表-->
+		<VerticalLayout width="150">
+			<ServerTree name="tree_serverlist" multipleitem="true" bkcolor="#FFFFFFFF" bordersize="1" bordercolor="#FFCFCFCF" itemtextcolor="#FF000000" itemhottextcolor="#FF000000" selitemtextcolor="#FF000000" itemhotbkcolor="#FFF2F2F2" itemselectedbkcolor="#FFCAE1FF" vscrollbar="true">
+
+			</ServerTree>
+		</VerticalLayout>
+		<!--右边布局-->
+		<VerticalLayout>
+			<HorizontalLayout bkcolor="#FFFFFFFF" height="25">
+				<FrontButton name="bt_update" text="磁盘更新" width="100" frontWidth="16" frontHeight="16" frontOffsetX="5" frontOffsetY="5" normalimage="file='material/general/editbkimage.png' source='0,0,107,30'" hotimage="file='material/general/editbkimage.png' source='0,31,107,61'" frontimage="material/listbtn/diskupdate02.png"/>
+				<FrontButton name="bt_produce" text="生成新磁盘" width="100" frontWidth="16" frontHeight="16" frontOffsetX="5" frontOffsetY="5" normalimage="file='material/general/editbkimage.png' source='0,0,107,30'" hotimage="file='material/general/editbkimage.png' source='0,31,107,61'" frontimage="material/listbtn/newdisk02.png"/>
+				<FrontButton name="bt_create" text="创建新磁盘" width="100" frontWidth="16" frontHeight="16" frontOffsetX="5" frontOffsetY="5" normalimage="file='material/general/editbkimage.png' source='0,0,107,30'" hotimage="file='material/general/editbkimage.png' source='0,31,107,61'" frontimage="material/listbtn/adddisk02.png"/>
+				<FrontButton name="bt_exp" text="磁盘扩容" width="100" frontWidth="16" frontHeight="16" frontOffsetX="5" frontOffsetY="5" normalimage="file='material/general/editbkimage.png' source='0,0,107,30'" hotimage="file='material/general/editbkimage.png' source='0,31,107,61'" frontimage="material/listbtn/diskex02.png"/>
+				<FrontButton name="bt_del" text="磁盘删除" width="100" frontWidth="16" frontHeight="16" frontOffsetX="5" frontOffsetY="5" normalimage="file='material/general/editbkimage.png' source='0,0,107,30'" hotimage="file='material/general/editbkimage.png' source='0,31,107,61'" frontimage="material/listbtn/del.png"/>
+			</HorizontalLayout>	
+			<DiskInfoUpContactList name="lt_diskinfoup" height="250" vscrollbar="true" hscrollbar="true" itemlinecolor="#FFCFCFCF" itemendellipsis="true" bordercolor="#FFCFCFCF" bordersize="2,2,2,2" bkcolor="#FFFFFFFF" itemtextcolor="#FF000000" itemselectedtextcolor="#FFFFFFFF" itemselectedbkcolor="#FFCAE1FF" itemhotbkcolor="#FFF2F2F2">
+				<ListHeader name="hd_diskinfoup">
+					<ListHeaderItem text="名称" width="120" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,0,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
+					<ListHeaderItem text="磁盘路径" width="200" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,0,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
+					<ListHeaderItem text="磁盘格式" width="80" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,0,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
+					<ListHeaderItem text="磁盘大小" width="80" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,0,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
+					<ListHeaderItem text="修改时间" width="100" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,0,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
+					<ListHeaderItem text="备注" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,0,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
+				</ListHeader>
+			</DiskInfoUpContactList>	
+			<DiskInfoDownContactList name="lt_diskinfodown" vscrollbar="true" hscrollbar="true" itemlinecolor="#FFCFCFCF" itemendellipsis="true" bordercolor="#FFCFCFCF" bordersize="2,2,2,2" bkcolor="#FFFFFFFF" itemtextcolor="#FF000000" itemselectedtextcolor="#FFFFFFFF" itemselectedbkcolor="#FFCAE1FF" itemhotbkcolor="#FFF2F2F2">
+				<ListHeader name="hd_diskinfodown">
+					<ListHeaderItem text="名称" width="120" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,0,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
+					<ListHeaderItem text="磁盘路径" width="200" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,0,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
+					<ListHeaderItem text="磁盘格式" width="80" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,0,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
+					<ListHeaderItem text="磁盘大小" width="80" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,0,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
+					<ListHeaderItem text="修改时间" width="100" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,0,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
+					<ListHeaderItem text="备注" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,0,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
+				</ListHeader>
+			</DiskInfoDownContactList>			
+		</VerticalLayout>
+	</HorizontalLayout>
+</Window>

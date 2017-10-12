@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Window >
+<!--<Default name="CheckBox" value="normalimage=&quot;file='material/cherkbox.png' source='0,0,15,15' dest='0,0,15,15'&quot; hotimage=&quot;file='material/cherkbox.png' source='0,15,15,30' dest='0,0,15,15'&quot; pushedimage=&quot;file='material/cherkbox.png' source='0,30,15,45' dest='0,0,15,15'&quot; selectedimage=&quot;file='material/cherkbox.png' source='0,45,15,60' dest='0,0,15,15'&quot;"/>-->
+	<Default name="CheckBox" value="normalimage=&quot;file='material/general/checkbox.png' source='0,0,15,15' dest='0,0,15,15'&quot; hotimage=&quot;file='material/general/checkbox.png' source='0,15,15,30' dest='0,0,15,15'&quot; pushedimage=&quot;file='material/general/checkbox.png' source='0,30,15,45' dest='0,0,15,15'&quot; selectedimage=&quot;file='material/general/checkbox.png' source='0,45,15,60' dest='0,0,15,15'&quot;"/>
+	<TreeNode name="nd_mgrname" text=""  height="20" bordercolor="#FF6CA6CD" bordersize="1" bkcolor="#FFA4D3EE" itemattr="valign=&quot;vcenter&quot; textpadding=&quot;12,0,0,0&quot;" folderattr="padding=&quot;10,7,0,0&quot; width=&quot;10&quot; height=&quot;10&quot; normalimage=&quot;file='material/general/combox_pull_normal.png'&quot; selectedimage=&quot;file='material/general/combox_pull_hot.png'&quot;">
+		<!--<CheckBox  name="chb_ip3" float="true" pos="20,3,0,0" text="Admin" padding="0,5,0,5" textpadding="10,0,0,0" width="100" height="15"/>-->
+	</TreeNode>
+</Window>

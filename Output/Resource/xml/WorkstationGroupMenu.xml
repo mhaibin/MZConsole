@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Window>
+     <DuiMenuContainer interval="10" keyevent="true" windowxml="xml/MenuWindowDefault.xml">
+		<DuiMenu name="workstationGroup_menu" major="true" width="130" height="85" bkimage="" bkcolor="#FFFFFFFF" hole="ture" itemhottextcolor="#FFFFFFFF" itemhotbkcolor="#FF3ABE9D" itemshowhtml="true" roundcorner="5,5" showshadow="true" shadowsize="5" shadowposition="1,1" shadowcolor="#333333">
+			<DuiMenuElement name  = "add_group" command="addgroup" text="{x 36}添加分组" hottext="{x 36}添加分组" height = "28"/>
+			<DuiMenuElement name  = "modify_group" command="modifygroup" text="{x 36}修改分组" hottext="{x 36}修改分组" height = "28"/>
+			<DuiMenuElement name  = "del_group" command="delgroup" text="{x 36}删除分组" hottext="{x 36}删除分组" height = "28"/>
+		</DuiMenu>
+	</DuiMenuContainer>
+</Window>
