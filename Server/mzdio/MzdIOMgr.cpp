@@ -6,16 +6,31 @@
 #include "UtilLog.h"
 #include "MZConsoleDefine.h"
 
+#define	UPDATEDATATIMER			(1000)
 
 CMzdIOMgr::CMzdIOMgr()
 {
+	m_hWnd = Create(NULL);
+	ATLASSERT(m_hWnd);
+
+	SetTimer(UPDATEDATATIMER, 3 * 1000, NULL);
+
 	m_bConnect = FALSE;
 	m_u32OnlineCount = 0;
 	m_u32OnlineCountSvr = 0;
+
+	m_hWorkstationWnd = NULL;
+	m_hServerWnd = NULL;
 //	Init();
 }
 CMzdIOMgr::~CMzdIOMgr()
 {
+	KillTimer(UPDATEDATATIMER);
+	if (NULL != m_hWnd)
+	{
+		DestroyWindow();
+		m_hWnd = NULL;
+	}
 	WSACleanup();
 }
 
@@ -582,7 +597,7 @@ void CMzdIOMgr::GetWorkstationMenuDiskInfo(UINT32 u32Num, map<CString, vector<Me
 		}
 	}//四个菜单
 }
-void CMzdIOMgr::SetWorkStationToMZD(LPCTSTR strNum, LPCTSTR strWksNum, LPCTSTR strWksIP, WorkstationInfo &itemData, map<CString, vector<MenuDiskInfo>> &mapMenuDiskInfo, UINT32 u32Flag)
+void CMzdIOMgr::SetWorkStationToMZD(LPCTSTR strNum, LPCTSTR strWksNum, LPCTSTR strWksIP, WorkstationInfo &itemData, map<CString, vector<MenuDiskInfo>> &mapMenuDiskInfo, vector<CString> &vecNewMenu, UINT32 u32Flag)
 {
 	//u8Flag:0表示添加
 	CString str;
@@ -614,6 +629,26 @@ void CMzdIOMgr::SetWorkStationToMZD(LPCTSTR strNum, LPCTSTR strWksNum, LPCTSTR s
 		MZDUI_SET_WKS(CString(strNum), "MenuSet4", (CStringW)L"" );
 	}
 	int Wks_Menum_Cfgs = 1;
+	INT32 nVecSize = vecNewMenu.size();
+	map<CString, vector<MenuDiskInfo>>::iterator itor = mapMenuDiskInfo.begin();
+	while(itor != mapMenuDiskInfo.end())
+	{
+		CStringA MenuSet; 
+		MenuSet.Format("MenuSet%d", Wks_Menum_Cfgs);
+		CString strMenu;
+		if(Wks_Menum_Cfgs>nVecSize)
+			strMenu = _T("");
+		else
+			strMenu = vecNewMenu[(Wks_Menum_Cfgs-1)];
+		MZDUI_SET_WKS(CString(strNum), MenuSet.GetBuffer(), strMenu);
+		Wks_Menum_Cfgs++;
+		itor++;
+	}
+
+}
+void CMzdIOMgr::SetWorkStationMenuInfo(WorkstationInfo &itemData, map<CString, vector<MenuDiskInfo>> &mapMenuDiskInfo, vector<CString> &vecNewMenu)
+{
+	int Wks_Menum_Cfgs = 1;
 	map<CString, vector<MenuDiskInfo>>::iterator itor = mapMenuDiskInfo.begin();
 	while(itor != mapMenuDiskInfo.end())
 	{
@@ -633,81 +668,110 @@ void CMzdIOMgr::SetWorkStationToMZD(LPCTSTR strNum, LPCTSTR strWksNum, LPCTSTR s
 				strDiskPath4 = itor->second[0].strServer + _T(" | ") + itor->second[3].strPath;
 		}
 
-// 		for ( int iCyc = 0; iCyc < iMenuCount; iCyc++ )
-// 		{
-			CStringW strMenu; // 在已有菜单里找相同的
+		CString strMenu; // 在已有菜单里找相同的
 
-			for ( int MenuID = 0; ; MenuID++ )
-			{ 
-				strMenu = MZDUI_GET_MENU(MenuID, "MenuName");
-				if ( *strMenu==0 ) break;
+		for ( int MenuID = 0; ; MenuID++ )
+		{ 
+			strMenu = MZDUI_GET_MENU(MenuID, "MenuName");
+			if ( *strMenu==0 ) break;
 
-				BOOL isExistMenu = FALSE;
-				do{
-					if ( MZDUI_GET_MENU(MenuID, "displayName") != strMeunName ) break;
+			BOOL isExistMenu = FALSE;
+			do{
+				if ( MZDUI_GET_MENU(MenuID, "displayName") != strMeunName ) break;
 
-					if (0 != MZDUI_GET_MENU(MenuID, "DskSet1").Compare(strDiskPath1)) break;
-					if (0 != MZDUI_GET_MENU(MenuID, "DskSet2").Compare(strDiskPath2)) break;
-					if (0 != MZDUI_GET_MENU(MenuID, "DskSet3").Compare(strDiskPath3)) break;
-					if (0 != MZDUI_GET_MENU(MenuID, "DskSet4").Compare(strDiskPath4)) break;
+				if (0 != MZDUI_GET_MENU(MenuID, "DskSet1").Compare(strDiskPath1)) break;
+				if (0 != MZDUI_GET_MENU(MenuID, "DskSet2").Compare(strDiskPath2)) break;
+				if (0 != MZDUI_GET_MENU(MenuID, "DskSet3").Compare(strDiskPath3)) break;
+				if (0 != MZDUI_GET_MENU(MenuID, "DskSet4").Compare(strDiskPath4)) break;
 
-					if (0 != MZDUI_GET_MENU(MenuID, "BootOrd").Compare(strBootType)) break;
+				if (0 != MZDUI_GET_MENU(MenuID, "BootOrd").Compare(strBootType)) break;
 
-					if (0 != MZDUI_GET_MENU(MenuID, "NumberLength").Compare(itemData.strNumLen)) break;
-					if (0 != MZDUI_GET_MENU(MenuID, "ComPre").Compare(itemData.strFName)) break;
-					if (0 != MZDUI_GET_MENU(MenuID, "ComPos").Compare(itemData.strBName)) break;
-//					if ( MZDUI_GET_MENU(MenuID, "StartNumber") != StartNumber ) break;
-					if (0 != MZDUI_GET_MENU(MenuID, "wksStartIp").Compare(itemData.strIP)) break;
-					if (0 != MZDUI_GET_MENU(MenuID, "wksSubMask").Compare(itemData.strMask)) break;
-					if (0 != MZDUI_GET_MENU(MenuID, "Gateway").Compare(itemData.strGetway)) break;
-					if (0 != MZDUI_GET_MENU(MenuID, "Dns1").Compare(itemData.strDNSI1)) break;
-					if (0 != MZDUI_GET_MENU(MenuID, "Dns2").Compare(itemData.strDNSI2)) break;
-					CString strDelay;
-					strDelay.Format(_T("%u"), itemData.u32Delay);
-					if (0 != MZDUI_GET_MENU(MenuID, "Wait_Times").Compare(strDelay)) break;
-					if (0 != MZDUI_GET_MENU(MenuID, "Scr_Res").Compare(itemData.strDPI)) break;
-
-					isExistMenu = TRUE;	
-				}while(FALSE);
-
-				if ( isExistMenu==TRUE ) break;
-			}
-
-			if ( *strMenu==0 ) // 生成新菜单
-			{
-				strMenu = CreateMenuName();
-				MZDUI_SET_MENU(strMenu, "MenuName", strMenu);
-				MZDUI_SET_MENU(strMenu, "displayName", strMeunName);
-
-				MZDUI_SET_MENU(strMenu, "DskSet1", strDiskPath1);
-				MZDUI_SET_MENU(strMenu, "DskSet2", strDiskPath2);
-				MZDUI_SET_MENU(strMenu, "DskSet3", strDiskPath3);
-				MZDUI_SET_MENU(strMenu, "DskSet4", strDiskPath4);
-				MZDUI_SET_MENU(strMenu, "BootOrd", strBootType);
-
-				MZDUI_SET_MENU(strMenu, "NumberLength", itemData.strNumLen);
-				MZDUI_SET_MENU(strMenu, "ComPre", itemData.strFName);
-				MZDUI_SET_MENU(strMenu, "ComPos", itemData.strBName);
-				MZDUI_SET_MENU(strMenu, "StartNumber", CString(_T("0")));
-				MZDUI_SET_MENU(strMenu, "wksStartIp", itemData.strIP);
-				MZDUI_SET_MENU(strMenu, "wksSubMask", itemData.strMask);
-				MZDUI_SET_MENU(strMenu, "Gateway", itemData.strGetway);
-				MZDUI_SET_MENU(strMenu, "Dns1", itemData.strDNSI1);
-				MZDUI_SET_MENU(strMenu, "Dns2", itemData.strDNSI2);
+				if (0 != MZDUI_GET_MENU(MenuID, "NumberLength").Compare(itemData.strNumLen)) break;
+				if (0 != MZDUI_GET_MENU(MenuID, "ComPre").Compare(itemData.strFName)) break;
+				if (0 != MZDUI_GET_MENU(MenuID, "ComPos").Compare(itemData.strBName)) break;
+				//					if ( MZDUI_GET_MENU(MenuID, "StartNumber") != StartNumber ) break;
+				if (0 != MZDUI_GET_MENU(MenuID, "wksStartIp").Compare(itemData.strIP)) break;
+				if (0 != MZDUI_GET_MENU(MenuID, "wksSubMask").Compare(itemData.strMask)) break;
+				if (0 != MZDUI_GET_MENU(MenuID, "Gateway").Compare(itemData.strGetway)) break;
+				if (0 != MZDUI_GET_MENU(MenuID, "Dns1").Compare(itemData.strDNSI1)) break;
+				if (0 != MZDUI_GET_MENU(MenuID, "Dns2").Compare(itemData.strDNSI2)) break;
 				CString strDelay;
 				strDelay.Format(_T("%u"), itemData.u32Delay);
-				MZDUI_SET_MENU(strMenu, "Wait_Times", strDelay);
-				MZDUI_SET_MENU(strMenu, "Scr_Res", itemData.strDPI);
-			}
+				if (0 != MZDUI_GET_MENU(MenuID, "Wait_Times").Compare(strDelay)) break;
+				if (0 != MZDUI_GET_MENU(MenuID, "Scr_Res").Compare(itemData.strDPI)) break;
 
-			CStringA MenuSet; 
-			MenuSet.Format("MenuSet%d", Wks_Menum_Cfgs);
-			MZDUI_SET_WKS(CString(strNum), MenuSet.GetBuffer(), strMenu);
-			Wks_Menum_Cfgs++;
-//		}
+				isExistMenu = TRUE;	
+			}while(FALSE);
+
+			if ( isExistMenu==TRUE ) break;
+		}
+
+		if ( *strMenu==0 ) // 生成新菜单
+		{
+			strMenu = CreateMenuName();
+			MZDUI_SET_MENU(strMenu, "MenuName", strMenu);
+			MZDUI_SET_MENU(strMenu, "displayName", strMeunName);
+
+			MZDUI_SET_MENU(strMenu, "DskSet1", strDiskPath1);
+			MZDUI_SET_MENU(strMenu, "DskSet2", strDiskPath2);
+			MZDUI_SET_MENU(strMenu, "DskSet3", strDiskPath3);
+			MZDUI_SET_MENU(strMenu, "DskSet4", strDiskPath4);
+			MZDUI_SET_MENU(strMenu, "BootOrd", strBootType);
+
+			MZDUI_SET_MENU(strMenu, "NumberLength", itemData.strNumLen);
+			MZDUI_SET_MENU(strMenu, "ComPre", itemData.strFName);
+			MZDUI_SET_MENU(strMenu, "ComPos", itemData.strBName);
+			MZDUI_SET_MENU(strMenu, "StartNumber", CString(_T("0")));
+			MZDUI_SET_MENU(strMenu, "wksStartIp", itemData.strIP);
+			MZDUI_SET_MENU(strMenu, "wksSubMask", itemData.strMask);
+			MZDUI_SET_MENU(strMenu, "Gateway", itemData.strGetway);
+			MZDUI_SET_MENU(strMenu, "Dns1", itemData.strDNSI1);
+			MZDUI_SET_MENU(strMenu, "Dns2", itemData.strDNSI2);
+			CString strDelay;
+			strDelay.Format(_T("%u"), itemData.u32Delay);
+			MZDUI_SET_MENU(strMenu, "Wait_Times", strDelay);
+			MZDUI_SET_MENU(strMenu, "Scr_Res", itemData.strDPI);
+		}
+		vecNewMenu.push_back(strMenu);
 		itor++;
 	}
+}
+void CMzdIOMgr::SetWorkstationDiskInfo(map<CString, vector<MenuDiskInfo>> &mapMenuDiskInfo)
+{
+	map<CString, vector<MenuDiskInfo>>::iterator itor = mapMenuDiskInfo.begin();
+	while(itor != mapMenuDiskInfo.end())
+	{
+		INT32 nSize = itor->second.size();
+		for(INT32 nIndex=0; nIndex<nSize; nIndex++)
+		{
+			CString strDiskPath = itor->second[nIndex].strPath;
+			if(strDiskPath.IsEmpty())
+			{
+				continue;
+			}
+			CString strDiskOwn;
+			INT32 iRet = strDiskPath.ReverseFind(L'.');
+			if(iRet > 0)
+			{
+				CString strSuffix = strDiskPath.Right(strDiskPath.GetLength() - iRet);
+				if(strSuffix.CompareNoCase(L".Upd") == 0)    //需要改进
+				{
+					DWORD SrvIP = UI_Get_Server_IP(itor->second[nIndex].strServer);
 
+					if ( UI_Cmd_SR(eMZDH_CMD_IMAGE_Own, strDiskPath, SrvIP)>=0 )
+					{
+						strDiskOwn = MZDUI_GET_IMAGE(0, "Path");
+					}
+				}
+			}
+			CString strPath = itor->second[nIndex].strServer + _T(" | ") + strDiskPath;
+
+			MZDUI_SET_DISK(strPath, "DiskDir", strDiskPath);
+			MZDUI_SET_DISK(strPath, "DiskName", strPath);  
+			MZDUI_SET_DISK(strPath, "DiskOwn", strDiskOwn);
+		}
+		itor++;
+	}
 }
 void CMzdIOMgr::SetServerInfoToMZD(LPCTSTR pstrIP, LPCTSTR pStrOldName, LPCTSTR pStrNewName, ServerInfo &Info, UINT32 u32Flag)
 {
@@ -1249,6 +1313,16 @@ void CMzdIOMgr::WakeUpWorkStation(LPCTSTR pStrNum)
 {
 	UI_Cmd_SR(eMZDH_CMD_WKS_WAKEUP, _ttoi(pStrNum), 0, 0);
 }
+//是否自动添加工作站
+BOOL CMzdIOMgr::isAutoAdd()
+{
+	return (0 == MZDUI_GET_GLOBAL(0, "AutoAdd").Compare(_T("1")))? TRUE : FALSE;
+}
+//设置自动添加工作站
+void CMzdIOMgr::SetAutoAdd(BOOL bAdd)
+{
+	MZDUI_SET_GLOBAL("AutoAdd", bAdd? CString(_T("1")) : CString(_T("0")));
+}
 //获取分组
 void CMzdIOMgr::GetAllGroup(map<UINT32, CString> &mapGroup)
 {
@@ -1320,6 +1394,16 @@ BOOL CMzdIOMgr::IsExistGroup(LPCTSTR pStrGroup)
 		itor++;
 	}
 	return FALSE;
+}
+void CMzdIOMgr::GetUpdateWorkstationInfo(vector<WorkstationInfo> &vecUpdateWorkstation)
+{
+	vecUpdateWorkstation = m_vecUpdateWorkstation;
+	m_vecUpdateWorkstation.clear();
+}
+void CMzdIOMgr::GetUpdateServerInfo(vector<ServerItem> &vecUpdateServerInfo)
+{
+	vecUpdateServerInfo = m_vecUpdateServer;
+	m_vecUpdateServer.clear();
 }
 INT32 CMzdIOMgr::WorkstationNumClashCheck(INT32 Type, char *strChk_KN, CString strChk_KV, CString strWksNum, CString strErrType, CString strErrMsg)
 {
@@ -1419,4 +1503,91 @@ CString CMzdIOMgr::CreateMenuName()
 		if ( newName!=L"" ) return newName;
 	}
 	return L"";
+}
+
+LRESULT CMzdIOMgr::OnTimer(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL&bHandled)
+{
+	switch (wParam)
+	{
+	case UPDATEDATATIMER:
+		OnTimerUpdateData();
+		break;
+	default:
+		break;
+	}
+	return S_OK;
+}
+
+void CMzdIOMgr::OnTimerUpdateData()
+{
+	BOOL bOk = SendDownLoadCmd();
+	if(FALSE == bOk)
+	{
+		Util::Log::Error(_T("Server"), _T("[error]定时同步服务器数据，发送同步数据命令失败\r\n"));
+		return ;
+	}
+	//1.现将本地工作站的数据临时存储一份；
+	map<UINT32, WorkstationInfo> mapTempWorkstationInfo;
+	mapTempWorkstationInfo = m_mapWorkstation;
+	WorkstationLoadData();
+	//2.判断那些数据已经更新
+	map<UINT32, WorkstationInfo>::iterator itor = m_mapWorkstation.begin();
+	while(itor != m_mapWorkstation.end())
+	{
+		map<UINT32, WorkstationInfo>::iterator itFind = mapTempWorkstationInfo.find(itor->first);
+		if(itFind == mapTempWorkstationInfo.end())
+		{
+			m_vecUpdateWorkstation.push_back(itor->second);
+			itor++;
+			continue;
+		}
+		else
+		{
+			if(!(itor->second == itFind->second))
+			{
+				m_vecUpdateWorkstation.push_back(itor->second);
+				itor++;
+				continue;
+			}
+		}
+		itor++;
+	}
+	if(0 < m_vecUpdateWorkstation.size())
+	{
+		//发送消息给工作站窗口，进行更新
+		::PostMessage(m_hWorkstationWnd, UM_UPDATEWROKSTATION_MSG, 0, 0);
+	}
+
+	//1.将本地服务器的数据临时存储一份
+	map<CString, ServerItem> mapTempServerInfo;
+	mapTempServerInfo = m_mapServer;
+	ServerLoadData();
+	//2.判断更新的服务器信息
+	map<CString, ServerItem>::iterator itor2 = m_mapServer.begin();
+	while(itor2 != m_mapServer.end())
+	{
+		map<CString, ServerItem>::iterator itFind2 = mapTempServerInfo.find(itor2->first);
+		if(itFind2 == mapTempServerInfo.end())
+		{
+			m_vecUpdateServer.push_back(itor2->second);
+			itor2++;
+			continue;
+		}
+		else
+		{
+			if(!(itor2->second == itFind2->second))
+			{
+				m_vecUpdateServer.push_back(itor2->second);
+				itor2++;
+				continue;
+			}
+		}
+		itor2++;
+	}
+	if(0 < m_vecUpdateServer.size())
+	{
+		//发送消息给服务器窗口，进行更新
+		::PostMessage(m_hServerWnd, UM_UPDATESERVER_MSG, 0, 0);
+	}
+
 }

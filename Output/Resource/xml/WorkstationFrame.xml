@@ -32,12 +32,12 @@
 					<ListHeader name="hd_workstation" >
 						<ListHeaderItem text="编号" width="60" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,3,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
 						<ListHeaderItem text="计算机名" width="80" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,3,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
-						<ListHeaderItem text="MAC" width="80" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,3,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
+						<ListHeaderItem text="MAC" width="180" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,3,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
 						<ListHeaderItem text="工作站IP" width="100" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,3,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
 						<ListHeaderItem text="保护状态" width="60" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,3,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
 						<ListHeaderItem text="缓存大小" width="60" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,3,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
 						<ListHeaderItem text="主镜像IP" width="100" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,3,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
-						<ListHeaderItem text="当前主镜像文件" width="200" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,3,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
+						<ListHeaderItem text="当前主镜像文件" width="260" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,3,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
 						<ListHeaderItem text="回写目录" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,3,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
 					</ListHeader>
 				</WorkstationContactList>

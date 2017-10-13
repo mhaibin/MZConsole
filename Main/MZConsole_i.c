@@ -6,7 +6,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Wed Oct 11 16:42:02 2017
+/* at Fri Oct 13 15:08:14 2017
  */
 /* Compiler settings for .\MZConsole.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 

@@ -227,8 +227,8 @@ void CServerFrame::OnDel()
 		{
 			if(TRUE != Singleton<CMzdIOMgr>::Instance().SendUpLoadCmd())     //同步INI
 			{
-				Util::Log::Error(_T("MZSkin"), _T("[error]删除服务器的时发送同步命令出错\r\n"));
-				return;
+//				Util::Log::Error(_T("MZSkin"), _T("[error]删除服务器的时发送同步命令出错\r\n"));
+//				return;
 			}
 			::PostMessage(m_hWnd, UW_LOADSERVER_MSG, NULL, NULL);
 		}

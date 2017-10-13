@@ -44,6 +44,8 @@ protected:
 	void ExitProcessEvn();
 	
 	void UpdateStatusBar();
+	//工作站有更新
+	void OnUpdateWorkstation();
 private:
 	//删除工作站
 	void OnDel();

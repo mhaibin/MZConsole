@@ -510,7 +510,7 @@ void CAddServerWnd::OnClickApply()
 	}
 	if(TRUE != Singleton<CMzdIOMgr>::Instance().SendUpLoadCmd())   //同步INI
 	{
-		Util::Log::Error(_T("MZSKin"), _T("[error]服务器添加或修改同步数据出错<serverName=%s>\r\n"), m_strServerName);
+		//Util::Log::Error(_T("MZSKin"), _T("[error]服务器添加或修改同步数据出错<serverName=%s>\r\n"), m_strServerName);
 	}
 	::PostMessage(m_hParentWnd, UW_LOADSERVER_MSG, NULL, NULL);
 	Close(IDCANCEL);

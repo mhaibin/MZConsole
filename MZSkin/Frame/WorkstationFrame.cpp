@@ -58,7 +58,9 @@ void CWorkstationFrame::InitWindow()
 	m_pLabStatus = static_cast<CLabelUI*>(m_PaintManager.FindControl(_T("lab_statusicon")));
 	CLabelUI *pLabStart = static_cast<CLabelUI*>(m_PaintManager.FindControl(_T("lab_start")));
 	CFrontButtonUI *pSupBtn = static_cast<CFrontButtonUI *>(m_PaintManager.FindControl(_T("bt_sup")));
-
+	CCheckBoxUI *pchkAutoAdd = static_cast<CCheckBoxUI*>(m_PaintManager.FindControl(_T("chb_autoadd")));
+	BOOL bAutoAdd = Singleton<CMzdIOMgr>::Instance().isAutoAdd();
+	pchkAutoAdd->SetCheck(bAutoAdd?true:false);
 	//判断超管
 	CString strSuperNum = Singleton<CMzdIOMgr>::Instance().GetSuperMgr();
 	UINT32 u32SuperNum = _ttoi(strSuperNum);
@@ -137,6 +139,8 @@ void CWorkstationFrame::InitWindow()
 	}
 	event::UpdateStatusBar().connect(this, &CWorkstationFrame::UpdateStatusBar);
 	UpdateStatusBar();
+	
+	Singleton<CMzdIOMgr>::Instance().SetWrokstationWnd(m_hWnd);
 }
 
 CControlUI* CWorkstationFrame::CreateControl(LPCTSTR pstrClass)
@@ -203,6 +207,10 @@ LRESULT CWorkstationFrame::HandleCustomMessage(UINT uMsg, WPARAM wParam, LPARAM 
 		}
 //		OnLoadWorkstation();
 	}
+	else if(UM_UPDATEWROKSTATION_MSG == uMsg)
+	{
+		OnUpdateWorkstation();
+	}
 	else if(WM_RBUTTONUP == uMsg)
 	{
 		OnRButtonDown(uMsg, wParam, lParam, bHandled);
@@ -255,7 +263,7 @@ LRESULT CWorkstationFrame::HandleCustomMessage(UINT uMsg, WPARAM wParam, LPARAM 
 				m_GroupList->AddChildNodeLab(m_pNode, msg->strContent, msg->strContent, FALSE, nID);
 				if(TRUE != Singleton<CMzdIOMgr>::Instance().SendUpLoadCmd())
 				{
-					Util::Log::Error(_T("MZSkin"), _T("[error]添加分组时，发送同步命令出错\r\n"));
+//					Util::Log::Error(_T("MZSkin"), _T("[error]添加分组时，发送同步命令出错\r\n"));
 				}
 			}
 			else
@@ -274,7 +282,7 @@ LRESULT CWorkstationFrame::HandleCustomMessage(UINT uMsg, WPARAM wParam, LPARAM 
 				m_pLabCurModifyGroup->SetText(msg->strContent);
 				if(TRUE != Singleton<CMzdIOMgr>::Instance().SendUpLoadCmd())
 				{
-					Util::Log::Error(_T("MZSkin"), _T("[error]修改分组时，发送同步命令出错\r\n"));
+//					Util::Log::Error(_T("MZSkin"), _T("[error]修改分组时，发送同步命令出错\r\n"));
 				}
 			}
 			else
@@ -445,11 +453,11 @@ BOOL CWorkstationFrame::OnRButtonDownWorkstationList(POINT &pt)
 		CDuiString strCmd = menu.TrackPopupMenu(m_PaintManager.GetPaintWindow(), pt.x+20, pt.y);
 		if(strCmd.IsEmpty())
 			return TRUE;
-		if(strCmd == _T("Wakeup"))
+		if(strCmd == _T("wakeup"))
 		{
 			OnWakeUp();
 		}
-		else if(strCmd == _T("clear_mac"))
+		else if(strCmd == _T("clearmac"))
 		{
 			OnClearMac();
 		}
@@ -601,6 +609,13 @@ void CWorkstationFrame::Notify(TNotifyUI& msg)
 		{
 			OnSuperMgr();
 		}
+		else if(0 == strName.Compare(_T("chb_autoadd")))//自动添加工作站
+		{
+			CCheckBoxUI *pChkAutoAdd = (CCheckBoxUI *)msg.pSender;
+			bool bCheck = pChkAutoAdd->GetCheck();
+			Singleton<CMzdIOMgr>::Instance().SetAutoAdd(bCheck?FALSE:TRUE);
+			Singleton<CMzdIOMgr>::Instance().SendUpLoadCmd();
+		}
 	}
 	else if(msg.sType == DUI_MSGTYPE_ITEMSELECT)
 	{
@@ -672,6 +687,44 @@ void CWorkstationFrame::UpdateStatusBar()
 	strText.Format(_T("超管编号：{c #5b75fb}%s{/c}"), strSuperNum);
 	pLabSuperNum->SetText(strText);
 }
+void CWorkstationFrame::OnUpdateWorkstation()
+{
+	CString strSuperNum = Singleton<CMzdIOMgr>::Instance().GetSuperMgr();
+	UINT32 u32SuperNum = _ttoi(strSuperNum);
+	vector<WorkstationInfo> vecUpdateWorkstation;
+	Singleton<CMzdIOMgr>::Instance().GetUpdateWorkstationInfo(vecUpdateWorkstation);
+	INT32 nSize = vecUpdateWorkstation.size();
+	for (INT32 nIndex=0; nIndex<nSize; nIndex++)
+	{
+		WorkstationItem item;
+		BOOL bIsExistItem = m_pList->GetItem(vecUpdateWorkstation[nIndex].u32Num, item);
+		item.strIP = vecUpdateWorkstation[nIndex].strIP;
+		item.strMac = vecUpdateWorkstation[nIndex].strMac;
+		item.u32Num = vecUpdateWorkstation[nIndex].u32Num;
+		item.u32Size = _ttoi(vecUpdateWorkstation[nIndex].strSize);
+		item.strName = vecUpdateWorkstation[nIndex].strName;
+		item.strMirrorIP = vecUpdateWorkstation[nIndex].strMirrorIP;
+		item.strMirrorFile = vecUpdateWorkstation[nIndex].strMirrorFile;
+		item.strReturnWDir = vecUpdateWorkstation[nIndex].strReturnWDir;
+		if(TRUE == bIsExistItem)
+		{
+			m_pList->SetItem(vecUpdateWorkstation[nIndex].u32Num, item);
+		}
+		else
+		{
+			if(u32SuperNum == vecUpdateWorkstation[nIndex].u32Num && 1 == vecUpdateWorkstation[nIndex].u8Status)
+				item.strIcon = _T("material/listbtn/super02.png");
+			else if(u32SuperNum == vecUpdateWorkstation[nIndex].u32Num && 0 == vecUpdateWorkstation[nIndex].u8Status)
+				item.strIcon = _T("material/listbtn/super01.png");
+			else if(1 == vecUpdateWorkstation[nIndex].u8Status)
+				item.strIcon = _T("material/listbtn/computer02.png");
+			else if(0 == vecUpdateWorkstation[nIndex].u8Status)
+				item.strIcon = _T("material/listbtn/computer01.png");
+			item.u8Status = vecUpdateWorkstation[nIndex].u8Status;
+			m_pList->InsertItem(vecUpdateWorkstation[nIndex].u32Num, item);
+		}
+	}
+}
 void CWorkstationFrame::OnDel()
 {
 	//获取超管编号，超管是不能删掉的
@@ -686,7 +739,7 @@ void CWorkstationFrame::OnDel()
 	{
 		return;
 	}
-
+	vector<UINT32> vecDel;
 	BOOL bIsHaveSuperMgr = FALSE;
 	INT32 nSize = m_pList->GetCount();
 	for (INT32 nIndex=0; nIndex<nSize; nIndex++)
@@ -702,10 +755,17 @@ void CWorkstationFrame::OnDel()
 				continue;
 			}
 			Singleton<CMzdIOMgr>::Instance().DelWorkstation(strNum.GetData());
-			//从列表中删掉
-			m_pList->DeleteItem((UINT32)_ttoi(strNum.GetData()));
+			vecDel.push_back((UINT32)_ttoi(strNum.GetData()));
 		}
 	}
+	//从列表中删掉
+	nSize = vecDel.size();
+	for (INT32 nIndex=0; nIndex<nSize; nIndex++)
+	{
+		m_pList->DeleteItem(vecDel[nIndex]);
+		Singleton<CMzdIOMgr>::Instance().DelWorkStation(vecDel[nIndex]);
+	}
+	
 	if(bIsHaveSuperMgr)
 	{
 		//提示超管不可以移除;
@@ -719,8 +779,8 @@ void CWorkstationFrame::OnDel()
 	Singleton<CMzdIOMgr>::Instance().CheckUnuserDisk();   //未使用磁盘检测
 	if(TRUE != Singleton<CMzdIOMgr>::Instance().SendUpLoadCmd())     //同步INI
 	{
-		Util::Log::Error(_T("MZSkin"), _T("[error]删除工作站的时，发送上传数据命令出错\r\n"));
-		return;
+// 		Util::Log::Error(_T("MZSkin"), _T("[error]删除工作站的时，发送上传数据命令出错\r\n"));
+// 		return;
 	}
 	if(TRUE != Singleton<CMzdIOMgr>::Instance().SendDownLoadCmd())
 	{
@@ -899,7 +959,7 @@ void CWorkstationFrame::OnSuperMgr()
 //		::PostMessage(m_hWnd, UW_LOADWORKSTATION_MSG, NULL, NULL);
 		if(TRUE != Singleton<CMzdIOMgr>::Instance().SendUpLoadCmd())     //同步INI
 		{
-			Util::Log::Error(_T("MZSkin"), _T("[error]设置工作站超管时，发送上传数据命令出错\r\n"));
+//			Util::Log::Error(_T("MZSkin"), _T("[error]设置工作站超管时，发送上传数据命令出错\r\n"));
 		}
 		event::UpdateStatusBar().run();
 	}
@@ -921,7 +981,7 @@ void CWorkstationFrame::DelGroup(CControlUI *pNode)
 		m_GroupList->Remove((CTreeNodeUI *)(pNode->GetParent()));
 		if(TRUE != Singleton<CMzdIOMgr>::Instance().SendUpLoadCmd())     //同步INI
 		{
-			Util::Log::Error(_T("MZSkin"), _T("[error]添加分组时，发送上传数据命令出错\r\n"));
+//			Util::Log::Error(_T("MZSkin"), _T("[error]添加分组时，发送上传数据命令出错\r\n"));
 		}
 	}
 	else
@@ -973,6 +1033,7 @@ void CWorkstationFrame::OnClearMac()
 
 	BOOL bIsHaveSuperMgr = FALSE;
 	INT32 nSize = m_pList->GetCount();
+	WorkstationItem item;
 	for (INT32 nIndex=0; nIndex<nSize; nIndex++)
 	{
 		CListContainerElementUI *pElement = (CListContainerElementUI *)(m_pList->GetItemAt(nIndex));
@@ -987,7 +1048,14 @@ void CWorkstationFrame::OnClearMac()
 				continue;
 			}
 			Singleton<CMzdIOMgr>::Instance().ClearMac(strNum.GetData());
-			pLabMac->SetText(_T(""));
+			WorkstationInfo itemData;
+			Singleton<CMzdIOMgr>::Instance().GetSimpleWorStation(_ttoi(strNum), itemData);
+			itemData.strMac = _T("");
+			Singleton<CMzdIOMgr>::Instance().SetWorkstationSimple(_ttoi(strNum), itemData);
+			
+			m_pList->GetItem(_ttoi(strNum), item);
+			item.strMac = _T("");
+			m_pList->SetItem(_ttoi(strNum), item);
 		}
 	}
 	if(bIsHaveSuperMgr)
@@ -1002,8 +1070,8 @@ void CWorkstationFrame::OnClearMac()
 
 	if(TRUE != Singleton<CMzdIOMgr>::Instance().SendUpLoadCmd())     //同步INI
 	{
-		Util::Log::Error(_T("MZSkin"), _T("[error]清除工作站MAC时，发送上传数据命令出错\r\n"));
-		return;
+// 		Util::Log::Error(_T("MZSkin"), _T("[error]清除工作站MAC时，发送上传数据命令出错\r\n"));
+// 		return;
 	}
 	if(TRUE != Singleton<CMzdIOMgr>::Instance().SendDownLoadCmd())
 	{

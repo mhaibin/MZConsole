@@ -8,9 +8,11 @@
 ************************************************************/
 #include "MZConsoleDefine.h"
 #include "SkinFieldDef.h"
+#include <atlwin.h>
 #include <map>
 #include <vector>
 
+using namespace ATL;
 using namespace std;
 
 struct s_ServerIPInfo
@@ -23,12 +25,24 @@ struct s_ServerIPInfo
 	UINT8 u8Sel;
 };
 
-class CMzdIOMgr
+class CMzdIOMgr : public CWindowImpl <CMzdIOMgr, CWindow, CWinTraits<WS_OVERLAPPEDWINDOW, 0> >
 {
 public:
 	CMzdIOMgr();
 	~CMzdIOMgr();
 
+	BEGIN_MSG_MAP(CMzdIOMgr)
+		MESSAGE_HANDLER(WM_TIMER, OnTimer)
+	END_MSG_MAP()
+
+	DECLARE_WND_CLASS(_T("CMzdIOMgr"))
+
+protected:
+	virtual LRESULT OnTimer(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL&bHandled);
+
+private:
+	//定时刷新本地数据
+	void OnTimerUpdateData();
 public:
 	//初始化
 	void Init();
@@ -114,13 +128,25 @@ public:
 	void ClearMac(LPCTSTR pStrNum);
 	//唤醒工作站
 	void WakeUpWorkStation(LPCTSTR pStrNum);
+	//是否自动添加工作站
+	BOOL isAutoAdd();
+	//设置自动添加工作站
+	void SetAutoAdd(BOOL bAdd);
 public:
+	//设置工作站的窗口
+	void SetWrokstationWnd(HWND hWnd){m_hWorkstationWnd = hWnd;}
+	//设置服务器的窗口
+	void SetServerWnd(HWND hWnd){m_hServerWnd = hWnd;}
 	//获取服务器相关磁盘数据；
 	void GetServerDiskData(LPCTSTR strName, vector<CString> &vecDiskPath);
 	//获取工作站菜单磁盘信息
 	void GetWorkstationMenuDiskInfo(UINT32 u32Num, map<CString, vector<MenuDiskInfo>> &mapMenuDiskInfo);
 	//设置工作站信息并同步到服务器
-	void SetWorkStationToMZD(LPCTSTR strNum, LPCTSTR strWksNum, LPCTSTR strWksIP, WorkstationInfo &itemData, map<CString, vector<MenuDiskInfo>> &mapMenuDiskInfo, UINT32 u32Flag);
+	void SetWorkStationToMZD(LPCTSTR strNum, LPCTSTR strWksNum, LPCTSTR strWksIP, WorkstationInfo &itemData, map<CString, vector<MenuDiskInfo>> &mapMenuDiskInfo, vector<CString> &vecNewMenu, UINT32 u32Flag);
+	//设置菜单信息, vecNewMenu为输出参数，新创建的菜单
+	void SetWorkStationMenuInfo(WorkstationInfo &itemData, map<CString, vector<MenuDiskInfo>> &mapMenuDiskInfo, vector<CString> &vecNewMenu);
+	//设置磁盘路径
+	void SetWorkstationDiskInfo(map<CString, vector<MenuDiskInfo>> &mapMenuDiskInfo);
 	//设置服务器信息并同步到服务器
 	void SetServerInfoToMZD(LPCTSTR pstrIP, LPCTSTR pStrOldName, LPCTSTR pStrNewName, ServerInfo &Info, UINT32 u32Flag);
 	//获取工作站的状态
@@ -173,6 +199,13 @@ public:
 	BOOL IsExistGroup(LPCTSTR pStrGroup);
 	/**********************************************************/
 
+	/*************************本地数据更新操作*******************************/
+	//获取更新的工作站信息
+	void GetUpdateWorkstationInfo(vector<WorkstationInfo> &vecUpdateWorkstation);
+	//获取更新的服务器信息
+	void GetUpdateServerInfo(vector<ServerItem> &vecUpdateServerInfo);
+	/*******************************************************/
+
 private:
 	//工作站编号冲突检测
 	INT32 WorkstationNumClashCheck(INT32 Type, char *strChk_KN, CString strChk_KV, CString strWksNum, CString strErrType, CString strErrMsg);
@@ -194,4 +227,10 @@ private:
 	map<CString, UINT32>					m_mapWorkstationStatus;	//工作站的状态信息
 	map<CString, UINT32>					m_mapServerStatus;		//服务器的状态信息
 	map<UINT32,	CString>					m_mapWorkstationGroup;	//工作站分组信息
+
+	vector<WorkstationInfo>					m_vecUpdateWorkstation;	//更新的工作站
+	vector<ServerItem>						m_vecUpdateServer;		//更新的服务器
+
+	HWND									m_hWorkstationWnd;		//工作站窗口句柄
+	HWND									m_hServerWnd;			//服务器窗口句柄
 };

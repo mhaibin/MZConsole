@@ -31,6 +31,20 @@ typedef struct _tagServerItem
 	{
 		u8Status = 0;
 	}
+	BOOL operator==(const _tagServerItem &other)
+	{
+		BOOL bRel = TRUE;
+		if(strName != other.strName
+			||strIP != other.strIP
+			||strReturnWDir != other.strReturnWDir
+			||strBuffPrama != other.strBuffPrama
+			||strSpareName != other.strSpareName
+			)
+		{
+			bRel = FALSE;
+		}
+		return bRel;
+	}
 	UINT8	u8Status;		//服务器状态
 	CString strName;		//服务器名称
 	CString strIP;			//服务器IP

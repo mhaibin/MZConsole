@@ -19,7 +19,8 @@ using namespace ATL;
 #define WM_REGISTERWND_MSG					WM_USER+1011	//弹出注册窗口信息
 #define WM_ADDWORKSTATIONERROR_MSG			WM_USER+1012	//添加工作站的时候，错误提示窗口消息
 #define UM_ISINBORDER_MSG					WM_USER+1013	//获取主窗口是否是在边框消息；
-
+#define UM_UPDATEWROKSTATION_MSG			WM_USER+1014	//本地工作站数据信息更新，需要刷新工作站列表
+#define UM_UPDATESERVER_MSG					WM_USER+1015	//本地服务器数据信息更新，需要刷新服务器列表
 
 
 typedef struct _tagWorkstationInfo
@@ -30,6 +31,33 @@ typedef struct _tagWorkstationInfo
 		u32Num = 0;
 		u32Delay = 0;
 		u32GroupID = 0;
+	}
+
+	BOOL operator==(const _tagWorkstationInfo &other)
+	{
+		BOOL bRel = TRUE;
+		if(u32Num != other.u32Num
+			|| u32Delay != other.u32Delay
+			|| u32GroupID != other.u32GroupID
+			|| strFName != other.strFName
+			|| strBName != other.strBName
+			|| strNumLen != other.strNumLen
+			|| strSize != other.strSize
+			|| strDPI != other.strDPI
+			|| strName != other.strName
+			|| strMac != other.strMac
+			|| strMask != other.strMask
+			|| strGetway != other.strGetway
+			|| strDNSI1 != other.strDNSI1
+			|| strDNSI2 != other.strDNSI2
+			|| strIP != other.strIP
+			|| strMirrorIP != other.strMirrorIP
+			|| strMirrorFile != other.strMirrorFile
+			|| strReturnWDir != other.strReturnWDir)
+		{
+			bRel = FALSE;
+		}
+		return bRel;
 	}
 	UINT8 u8Status;			//保护状态
 	UINT32 u32Num;			//编号

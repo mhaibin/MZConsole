@@ -676,6 +676,13 @@ INT32 CAddWorkstationWnd::AddNewWorkstation()
 		}
 	}
 
+	//设置菜单信息,这里itemData数据，不会用工作站名称编号信息，所以直接用第一个添加的工作站信息不会影响数据保存
+	vector<CString> vecNewMenu;
+	Singleton<CMzdIOMgr>::Instance().SetWorkStationMenuInfo(itemData, mapMenuDiskInfo, vecNewMenu);
+
+	//设置磁盘路径
+	Singleton<CMzdIOMgr>::Instance().SetWorkstationDiskInfo(mapMenuDiskInfo);
+	
 	if(0 == m_u32Flag)
 	{
 		Singleton<CWorkstationInfoMgr>::Instance().ClearAddWorkstation();
@@ -699,12 +706,13 @@ INT32 CAddWorkstationWnd::AddNewWorkstation()
 			itemData.strName = strWksNum;
 			itemData.u32Num = _ttoi(strWks);
 			itemData.strIP = strWksIP;
-			Singleton<CMzdIOMgr>::Instance().SetWorkStationToMZD(strWks, strWksNum, strWksIP, itemData, mapMenuDiskInfo,0);
+			Singleton<CMzdIOMgr>::Instance().SetWorkStationToMZD(strWks, strWksNum, strWksIP, itemData, mapMenuDiskInfo,vecNewMenu, 0);
 			//添加或修改工作站信息；
 			item.strIcon = _T("material/listbtn/computer01.png");
 			item.strIP = strStartIP;
 			item.strMac = itemData.strMac;
-			item.strMirrorFile = mapMenuDiskInfo[_T("1")][0].strServer + _T(" | ") + mapMenuDiskInfo[_T("1")][0].strPath;
+			if(0 < mapMenuDiskInfo[_T("1")].size())
+				item.strMirrorFile = mapMenuDiskInfo[_T("1")][0].strServer + _T(" | ") + mapMenuDiskInfo[_T("1")][0].strPath;
 			item.strName = strWksNum;
 			item.u32Num = _ttoi(strWks);
 			if(itemData.strSize == _T("自动"))
@@ -743,11 +751,12 @@ INT32 CAddWorkstationWnd::AddNewWorkstation()
 					Util::Log::Warn(_T("MZSKin"), _T("[warnning]修改工作站时，检测出工作站编号用相同工作站<Rel=%d>\r\n"), nCheckRel);
 					continue;
 				}
-				Singleton<CMzdIOMgr>::Instance().SetWorkStationToMZD(vecSelWorkstation[nIndex], strWksNum, strWksIP, itemData, mapMenuDiskInfo,_ttoi(vecSelWorkstation[0]));
+				Singleton<CMzdIOMgr>::Instance().SetWorkStationToMZD(vecSelWorkstation[nIndex], strWksNum, strWksIP, itemData, mapMenuDiskInfo, vecNewMenu, _ttoi(vecSelWorkstation[0]));
 				//添加或修改工作站信息；
 				item.strIP = strStartIP;
 				item.strMac = itemData.strMac;
-				item.strMirrorFile = mapMenuDiskInfo[_T("1")][0].strServer + _T(" |") + mapMenuDiskInfo[_T("1")][0].strPath;
+				if(0 < mapMenuDiskInfo[_T("1")].size())
+					item.strMirrorFile = mapMenuDiskInfo[_T("1")][0].strServer + _T(" |") + mapMenuDiskInfo[_T("1")][0].strPath;
 				item.strName = itemData.strName;
 				item.u32Num = _ttoi(vecSelWorkstation[nIndex]);
 				if(itemData.strSize == _T("自动"))
@@ -769,7 +778,8 @@ INT32 CAddWorkstationWnd::AddNewWorkstation()
 				Data.strIP = itemData.strIP;
 				Data.strMask = itemData.strMask;
 				Data.strGetway = itemData.strGetway;
-				Data.strMirrorFile = mapMenuDiskInfo[_T("1")][0].strServer + _T(" |") + mapMenuDiskInfo[_T("1")][0].strPath;
+				if(0 < mapMenuDiskInfo[_T("1")].size())
+					Data.strMirrorFile = mapMenuDiskInfo[_T("1")][0].strServer + _T(" |") + mapMenuDiskInfo[_T("1")][0].strPath;
 				Singleton<CMzdIOMgr>::Instance().SetWorkstationSimple(Data.u32Num, Data);
 			}
 		}
@@ -791,11 +801,12 @@ INT32 CAddWorkstationWnd::AddNewWorkstation()
 				Util::Log::Warn(_T("MZSKin"), _T("[warnning]修改单个工作站时，检测出工作站编号用相同工作站<Rel=%d>\r\n"), nCheckRel);
 				return 0;
 			}
-			Singleton<CMzdIOMgr>::Instance().SetWorkStationToMZD(strNum, strWksNum, strWksIP, itemData, mapMenuDiskInfo,m_u32Flag);
+			Singleton<CMzdIOMgr>::Instance().SetWorkStationToMZD(strNum, strWksNum, strWksIP, itemData, mapMenuDiskInfo, vecNewMenu, m_u32Flag);
 			//添加或修改工作站信息；
 			item.strIP = strStartIP;
 			item.strMac = itemData.strMac;
-			item.strMirrorFile = mapMenuDiskInfo[_T("1")][0].strServer + _T(" |") + mapMenuDiskInfo[_T("1")][0].strPath;
+			if(0 < mapMenuDiskInfo[_T("1")].size())
+				item.strMirrorFile = mapMenuDiskInfo[_T("1")][0].strServer + _T(" |") + mapMenuDiskInfo[_T("1")][0].strPath;
 			item.strName = itemData.strName;
 			item.u32Num = _ttoi(strNum);
 			if(itemData.strSize == _T("自动"))
@@ -817,18 +828,17 @@ INT32 CAddWorkstationWnd::AddNewWorkstation()
 			Data.strIP = itemData.strIP;
 			Data.strMask = itemData.strMask;
 			Data.strGetway = itemData.strGetway;
-			Data.strMirrorFile = mapMenuDiskInfo[_T("1")][0].strServer + _T(" |") + mapMenuDiskInfo[_T("1")][0].strPath;
+			if(0 < mapMenuDiskInfo[_T("1")].size())
+				Data.strMirrorFile = mapMenuDiskInfo[_T("1")][0].strServer + _T(" |") + mapMenuDiskInfo[_T("1")][0].strPath;
 			Singleton<CMzdIOMgr>::Instance().SetWorkstationSimple(Data.u32Num, Data);
 		}
 	}
-
-
 
 	Singleton<CMzdIOMgr>::Instance().CheckUnuserMenu();   //未使用菜单检测
 	Singleton<CMzdIOMgr>::Instance().CheckUnuserDisk();   //未使用磁盘检测
 	if(TRUE != Singleton<CMzdIOMgr>::Instance().SendUpLoadCmd())     //同步INI
 	{
-		Util::Log::Error(_T("MZSKin"), _T("[error]添加或修改单个工作站信息同步信息出错<flag=%u>\r\n"), m_u32Flag);
+		//Util::Log::Error(_T("MZSKin"), _T("[error]添加或修改单个工作站信息同步信息出错<flag=%u>\r\n"), m_u32Flag);
 	}
 	return 0;
 }

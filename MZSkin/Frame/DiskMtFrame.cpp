@@ -351,8 +351,8 @@ void CDiskMtFrame::OnDel()
 		{
 			if(TRUE != Singleton<CMzdIOMgr>::Instance().SendUpLoadCmd())     //同步INI
 			{
-				Util::Log::Error(_T("MZSkin"), _T("[error]删除磁盘时，发送更新服务器数据命令出错(\r\n"));
-				return;
+//				Util::Log::Error(_T("MZSkin"), _T("[error]删除磁盘时，发送更新服务器数据命令出错(\r\n"));
+//				return;
 			}
 			::PostMessage(m_hWnd, WM_LOADDISK_MSG, NULL, NULL);
 		}
