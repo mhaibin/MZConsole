@@ -18,6 +18,7 @@ namespace DuiLib{
 
 CWorkstationFrame::CWorkstationFrame()
 {
+	m_isMZDIORun  = FALSE;
 	m_u32CurWksCount = 0;
 	m_pList = NULL;
 	m_pElement = NULL;
@@ -130,6 +131,7 @@ void CWorkstationFrame::InitWindow()
 	event::ExitProcessEvn().connect(this, &CWorkstationFrame::ExitProcessEvn);
 	if(TRUE == Singleton<CMzdIOMgr>::Instance().IsConnect())
 	{
+		m_isMZDIORun = TRUE;
 		::SetTimer(m_hWnd, STATUSTIMER, 500, NULL);
 	}
 	else
@@ -210,6 +212,10 @@ LRESULT CWorkstationFrame::HandleCustomMessage(UINT uMsg, WPARAM wParam, LPARAM 
 	else if(UM_UPDATEWROKSTATION_MSG == uMsg)
 	{
 		OnUpdateWorkstation();
+	}
+	else if(UM_ISMZDIOSERVICERUN  == uMsg)
+	{
+		OnMZDIORun((BOOL)lParam);
 	}
 	else if(WM_RBUTTONUP == uMsg)
 	{
@@ -527,13 +533,20 @@ LRESULT CWorkstationFrame::OnTimer(WPARAM wParam, LPARAM lParam, BOOL & bHandled
 	else if(STATUSTIMER == wParam)
 	{
 		CString strBkImage = m_pLabStatus->GetBkImage();
-		if(strBkImage.IsEmpty())
+		if(m_isMZDIORun)
 		{
-			m_pLabStatus->SetBkImage(_T("material/general/status02.png"));
+			if(strBkImage.IsEmpty())
+			{
+				m_pLabStatus->SetBkImage(_T("material/general/status02.png"));
+			}
+			else
+			{
+				m_pLabStatus->SetBkImage(_T(""));
+			}
 		}
 		else
 		{
-			m_pLabStatus->SetBkImage(_T(""));
+			m_pLabStatus->SetBkImage(_T("material/general/status01.png"));
 		}
 	}
     return 0;
@@ -588,6 +601,7 @@ void CWorkstationFrame::Notify(TNotifyUI& msg)
 		else if(0 == strName.Compare(_T("bt_del")))//删除
 		{
 			OnDel();//post一个自定义消息
+
 		}
 		else if(0 == strName.Compare(_T("bt_dis")))//禁用
 		{
@@ -723,6 +737,19 @@ void CWorkstationFrame::OnUpdateWorkstation()
 			item.u8Status = vecUpdateWorkstation[nIndex].u8Status;
 			m_pList->InsertItem(vecUpdateWorkstation[nIndex].u32Num, item);
 		}
+	}
+}
+void CWorkstationFrame::OnMZDIORun(BOOL bRun)
+{
+	m_isMZDIORun = bRun;
+	CLabelUI *pLabStart = static_cast<CLabelUI*>(m_PaintManager.FindControl(_T("lab_start")));
+	if(bRun)
+	{
+		pLabStart->SetText(_T("MZD服务已启动"));
+	}
+	else
+	{
+		pLabStart->SetText(_T("MZD服务未启动"));
 	}
 }
 void CWorkstationFrame::OnDel()

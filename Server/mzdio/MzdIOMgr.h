@@ -66,7 +66,8 @@ public:
 	void GetRegsterInfo(RegsterInfo &info);
 	//是否注册
 	BOOL IsRegster();
-
+	//MZDIO服务是否启动
+	BOOL IsServiceRun(LPCTSTR pStrServerName);
 public:
 	//获取起始IP
 	CString GetSevDefIP();

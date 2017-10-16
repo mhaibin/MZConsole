@@ -46,6 +46,8 @@ protected:
 	void UpdateStatusBar();
 	//工作站有更新
 	void OnUpdateWorkstation();
+	//MZDIO服务器运行通知
+	void OnMZDIORun(BOOL bRun);
 private:
 	//删除工作站
 	void OnDel();
@@ -91,6 +93,8 @@ private:
 
 private:
 	UINT32					m_u32CurWksCount;		//点击添加或修改时的工作站的个数
+
+	BOOL					m_isMZDIORun;
 };
 
 }

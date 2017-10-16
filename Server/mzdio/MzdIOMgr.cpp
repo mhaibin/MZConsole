@@ -6,7 +6,8 @@
 #include "UtilLog.h"
 #include "MZConsoleDefine.h"
 
-#define	UPDATEDATATIMER			(1000)
+#define	UPDATEDATATIMER			1000
+#define CLICKIOSERVERRUN		1001			//MZDIO服务是否运行
 
 CMzdIOMgr::CMzdIOMgr()
 {
@@ -14,6 +15,8 @@ CMzdIOMgr::CMzdIOMgr()
 	ATLASSERT(m_hWnd);
 
 	SetTimer(UPDATEDATATIMER, 3 * 1000, NULL);
+
+	SetTimer(CLICKIOSERVERRUN, 3 * 1000, NULL);
 
 	m_bConnect = FALSE;
 	m_u32OnlineCount = 0;
@@ -26,6 +29,7 @@ CMzdIOMgr::CMzdIOMgr()
 CMzdIOMgr::~CMzdIOMgr()
 {
 	KillTimer(UPDATEDATATIMER);
+	KillTimer(CLICKIOSERVERRUN);
 	if (NULL != m_hWnd)
 	{
 		DestroyWindow();
@@ -260,6 +264,29 @@ BOOL CMzdIOMgr::IsRegster()
 	if(0 >= _ttoi(strNum))
 		return FALSE;
 	return TRUE;
+}
+BOOL CMzdIOMgr::IsServiceRun(LPCTSTR pStrServerName)
+{
+	SC_HANDLE hScm = OpenSCManager(0, 0, SC_MANAGER_ALL_ACCESS);
+
+	SC_HANDLE hService = NULL;
+	SERVICE_STATUS stStatus;
+
+	hService = OpenService(hScm, pStrServerName, SERVICE_ALL_ACCESS);
+	if (hService == NULL)
+	{
+		TCHAR wszMessageBuffer[128] = { 0 };
+		CloseServiceHandle( hScm );
+	}
+
+	memset(&stStatus, 0, sizeof(stStatus));
+	QueryServiceStatus(hService, &stStatus);
+	if (stStatus.dwCurrentState == SERVICE_RUNNING)
+	{
+		return TRUE ;
+	}
+
+	return FALSE ;
 }
 void CMzdIOMgr::GetAllWorkstation(map<UINT32, WorkstationInfo> &mapWorkstation)
 {
@@ -1511,6 +1538,16 @@ LRESULT CMzdIOMgr::OnTimer(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL&bHandle
 	{
 	case UPDATEDATATIMER:
 		OnTimerUpdateData();
+		break;
+	case CLICKIOSERVERRUN:
+		if(!IsServiceRun(_T("MZDH_IO")))
+		{
+			::PostMessage(m_hWorkstationWnd, UM_ISMZDIOSERVICERUN, NULL, 0);
+		}
+		else
+		{
+			::PostMessage(m_hWorkstationWnd, UM_ISMZDIOSERVICERUN, NULL, 1);
+		}
 		break;
 	default:
 		break;

@@ -21,6 +21,7 @@ using namespace ATL;
 #define UM_ISINBORDER_MSG					WM_USER+1013	//获取主窗口是否是在边框消息；
 #define UM_UPDATEWROKSTATION_MSG			WM_USER+1014	//本地工作站数据信息更新，需要刷新工作站列表
 #define UM_UPDATESERVER_MSG					WM_USER+1015	//本地服务器数据信息更新，需要刷新服务器列表
+#define UM_ISMZDIOSERVICERUN				WM_USER+1016	//MZD服务是否运行
 
 
 typedef struct _tagWorkstationInfo
