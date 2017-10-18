@@ -39,6 +39,15 @@ CAddWorkstationWnd::CAddWorkstationWnd()
 	m_u32Flag = 0;
 	m_pCurMDSelElement = NULL;
 	m_hParentWnd = NULL;
+
+	m_WksSize[CString(_T("-1"))] = 0;
+	m_WksSize[CString(_T("128"))] = 1;
+	m_WksSize[CString(_T("256"))] = 2;
+	m_WksSize[CString(_T("512"))] = 3;
+	m_WksSize[CString(_T("1024"))] = 4;
+	m_WksSize[CString(_T("2048"))] = 5;
+	m_WksSize[CString(_T("4096"))] = 6;
+	m_WksSize[CString(_T("0"))] = 7;
 }
 
 CAddWorkstationWnd::~CAddWorkstationWnd(void)
@@ -153,7 +162,7 @@ void CAddWorkstationWnd::InitWindow()
 		pLab_IP->SetText(_T("¹¤×÷Õ¾IP"));
 		pEditCombPDI->SetText(sInfo.strDPI);
 		CString str;
-		pCombBuffer->SetText(sInfo.strSize);
+		pCombBuffer->SelectItem(m_WksSize[sInfo.strSize]);
 		str.Format(_T("%u"), sInfo.u32Delay);
 		m_EditDelay->SetText(str);
 		m_ChkBoxRestore->SetCheck((1 == sInfo.u8Status)?true:false);

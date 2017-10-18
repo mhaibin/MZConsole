@@ -16,6 +16,7 @@ LPVOID CWorkstationContactList::GetInterface(LPCTSTR pstrName)
 	return __super::GetInterface(pstrName);
 }
 
+
 LPCTSTR CWorkstationContactList::GetClass() const
 {
 	return __super::GetClass();

@@ -12,6 +12,7 @@ public:
 
 	virtual LPCTSTR GetClass() const;
 	virtual LPVOID GetInterface(LPCTSTR pstrName);
+
 protected:
 	void OnInsertItem(CControlUI* pItem, WorkstationItem &item);
 	void OnSetItem(CControlUI *pItem, WorkstationItem &item);

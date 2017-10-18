@@ -338,10 +338,18 @@ void CMzdIOMgr::AddWorkStation(UINT32 uID, WorkstationInfo &itemData)
 }
 void CMzdIOMgr::DelWorkStation(UINT32 uID)
 {
+	CString strWks;
 	map<UINT32, WorkstationInfo>::iterator itor = m_mapWorkstation.find(uID);
 	if(itor != m_mapWorkstation.end())
 	{
+		strWks.Format(_T("%u"), itor->second.u32Num);
 		m_mapWorkstation.erase(itor);
+	}
+	//状态列表也要删掉
+	map<CString, UINT32>::iterator itor2 = m_mapWorkstationStatus.find(strWks);
+	if(itor2 != m_mapWorkstationStatus.end())
+	{
+		m_mapWorkstationStatus.erase(itor2);
 	}
 }
 void CMzdIOMgr::GetAllServer(map<CString, ServerItem> &mapServer)
@@ -633,17 +641,27 @@ void CMzdIOMgr::SetWorkStationToMZD(LPCTSTR strNum, LPCTSTR strWksNum, LPCTSTR s
 		MZDUI_SET_WKS(CString(strNum), "WksNumber", CString(strNum));
 		MZDUI_SET_WKS(CString(strNum), "AutoClear", (itemData.u8Status==1)?CString(_T("1")):CString(_T("0")));
 		if (itemData.strSize == L"自动") str = L"-1";
+		else str = itemData.strSize;
 		MZDUI_SET_WKS(CString(strNum), "WksMemory", str);
 		MZDUI_SET_WKS(CString(strNum), "ComName", CString(strWksNum));
 		MZDUI_SET_WKS(CString(strNum), "WksIP", CString(strWksIP));
+		if ( itemData.strDPI == L"-1(自动)" ) str = L"-1";
+		else str = itemData.strDPI;
+		MZDUI_SET_WKS(CString(strNum), "Scr_Res", str);
 	}
 	else if(0 < u32Flag)
 	{
 		CString strOldNum;
 		strOldNum.Format(_T("%u"), u32Flag);
 		MZDUI_SET_WKS(strOldNum, "WksNumber", CString(strNum));
+		if (itemData.strSize == L"自动") str = L"-1";
+		else str = itemData.strSize;
+		MZDUI_SET_WKS(CString(strNum), "WksMemory", str);
 		MZDUI_SET_WKS(CString(strNum), "ComName", itemData.strName);
 		MZDUI_SET_WKS(CString(strNum), "WksIP", itemData.strIP);
+		if ( itemData.strDPI == L"-1(自动)" ) str = L"-1";
+		else str = itemData.strDPI;
+		MZDUI_SET_WKS(CString(strNum), "Scr_Res", str);
 		WorkstationInfo info;
 		GetSimpleWorStation(u32Flag, info);
 		if(0 != info.strMac.Compare(itemData.strMac))

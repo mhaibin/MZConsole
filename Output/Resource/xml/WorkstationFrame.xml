@@ -30,7 +30,12 @@
 				</HorizontalLayout><!--WorkstationContactList-->
 				<WorkstationContactList name="lt_workstation" vscrollbar="true" hscrollbar="true" multiselect="true" itemlinecolor="#FFCFCFCF" itemendellipsis="true" bordercolor="#FFCFCFCF" bordersize="2,2,2,2" bkcolor="#FFFFFFFF" itemtextcolor="#FF000000" itemselectedtextcolor="#FFFFFFFF" itemselectedbkcolor="#FFCAE1FF" itemhotbkcolor="#FFF2F2F2">
 					<ListHeader name="hd_workstation" >
-						<ListHeaderItem text="编号" width="60" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,3,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
+						<ListHeaderItem name="header_num" text="" width="60" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,3,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left">
+							<HorizontalLayout>
+								<Label name="lab_headericon" height="16" width="16" padding="3,5,0,0"/>
+								<Label name="lab_headernum" text="编号" textcolor="#FF5C5C5C" height="20" width="30" padding="5,4,0,0"/>
+							</HorizontalLayout>
+						</ListHeaderItem>
 						<ListHeaderItem text="计算机名" width="80" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,3,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
 						<ListHeaderItem text="MAC" width="180" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,3,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>
 						<ListHeaderItem text="工作站IP" width="100" textcolor="#FF5C5C5C"  bkcolor="#FFC0C0C0" bordercolor="#FFCFCFCF" bordersize="0,0,3,2" textpadding="10,0,0,0" inset="1,0,1,0" height="28" minwidth="16"  sepwidth="2" align="left"/>

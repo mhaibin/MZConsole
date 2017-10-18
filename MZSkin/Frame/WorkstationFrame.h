@@ -24,6 +24,13 @@ class CWorkstationFrame : public WindowImplBase,
 public:
 	CWorkstationFrame();
 	~CWorkstationFrame(void);
+
+	//工作站降序排列
+	static int CALLBACK CompareDESCFunc(UINT_PTR pFront, UINT_PTR pBehind, UINT_PTR pOther);
+	//工作站升序排列
+	static int CALLBACK CompareASCFunc(UINT_PTR pFront, UINT_PTR pBehind, UINT_PTR pOther);
+	//工作站在线排列
+	static int CALLBACK CompareOnlineFunc(UINT_PTR pFront, UINT_PTR pBehind, UINT_PTR pOther);
 protected:
 	virtual CDuiString GetSkinFolder();
 	virtual UILIB_RESOURCETYPE GetResourceType() const;
@@ -95,6 +102,7 @@ private:
 	UINT32					m_u32CurWksCount;		//点击添加或修改时的工作站的个数
 
 	BOOL					m_isMZDIORun;
+	UINT32					m_u32SortFlag;			//排序标志；0：未排序;1:升序；2:降序;3:在线排序
 };
 
 }

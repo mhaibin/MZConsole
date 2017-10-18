@@ -15,9 +15,50 @@
 
 namespace DuiLib{
 	
+int CALLBACK CWorkstationFrame::CompareDESCFunc(UINT_PTR pFront, UINT_PTR pBehind, UINT_PTR pOther)
+{
+	CListContainerElementUI *pFElement = (CListContainerElementUI *)pFront;
+	CListContainerElementUI *pBElement = (CListContainerElementUI *)pBehind;
+	CLabelUI *pLabFNum = static_cast<CLabelUI*>(pFElement->FindSubControl(_T("lab_num")));
+	CLabelUI *pLabBNum = static_cast<CLabelUI*>(pBElement->FindSubControl(_T("lab_num")));
+	CDuiString strF = pLabFNum->GetText();
+	CDuiString strB = pLabBNum->GetText();
+	UINT32 u32FNum = _ttoi(strF.GetData());
+	UINT32 u32BNum = _ttoi(strB.GetData());
+	return u32FNum < u32BNum?1:0;
+}
+int CALLBACK CWorkstationFrame::CompareASCFunc(UINT_PTR pFront, UINT_PTR pBehind, UINT_PTR pOther)
+{
+	CListContainerElementUI *pFElement = (CListContainerElementUI *)pFront;
+	CListContainerElementUI *pBElement = (CListContainerElementUI *)pBehind;
+	CLabelUI *pLabFNum = static_cast<CLabelUI*>(pFElement->FindSubControl(_T("lab_num")));
+	CLabelUI *pLabBNum = static_cast<CLabelUI*>(pBElement->FindSubControl(_T("lab_num")));
+	CDuiString strF = pLabFNum->GetText();
+	CDuiString strB = pLabBNum->GetText();
+	UINT32 u32FNum = _ttoi(strF.GetData());
+	UINT32 u32BNum = _ttoi(strB.GetData());
+	return u32FNum < u32BNum?0:1;
+}
+int CALLBACK CWorkstationFrame::CompareOnlineFunc(UINT_PTR pFront, UINT_PTR pBehind, UINT_PTR pOther)
+{
+	CListContainerElementUI *pFElement = (CListContainerElementUI *)pFront;
+	CListContainerElementUI *pBElement = (CListContainerElementUI *)pBehind;
+	CLabelUI *pLabFNum = static_cast<CLabelUI*>(pFElement->FindSubControl(_T("lab_icon")));
+	CLabelUI *pLabBNum = static_cast<CLabelUI*>(pBElement->FindSubControl(_T("lab_icon")));
+	CDuiString strF = pLabFNum->GetText();
+	CDuiString strB = pLabBNum->GetText();
+	if(0 == strF.Compare(_T("material/listbtn/super02.png"))
+		|| 0 == strF.Compare(_T("material/listbtn/computer02.png"))
+		)
+	{
+		return 0;
+	}
+	return 1;
+}
 
 CWorkstationFrame::CWorkstationFrame()
 {
+	m_u32SortFlag = 0;
 	m_isMZDIORun  = FALSE;
 	m_u32CurWksCount = 0;
 	m_pList = NULL;
@@ -143,6 +184,7 @@ void CWorkstationFrame::InitWindow()
 	UpdateStatusBar();
 	
 	Singleton<CMzdIOMgr>::Instance().SetWrokstationWnd(m_hWnd);
+
 }
 
 CControlUI* CWorkstationFrame::CreateControl(LPCTSTR pstrClass)
@@ -668,6 +710,37 @@ void CWorkstationFrame::Notify(TNotifyUI& msg)
 
 		}
 	}
+	else if(msg.sType == DUI_MSGTYPE_HEADERCLICK)
+	{
+		CLabelUI *pLabSortIcon = static_cast<CLabelUI *>(m_PaintManager.FindControl(_T("lab_headericon")));
+		if(0 == strName.Compare(_T("header_num"))
+			|| 0 == strName.Compare(_T("lab_headericon"))
+			|| 0 == strName.Compare(_T("lab_headernum")))
+		{
+			if(4 <= m_u32SortFlag)
+				m_u32SortFlag = 0;
+			if(0 == m_u32SortFlag)
+				m_u32SortFlag++;
+			if(1 == m_u32SortFlag)
+			{
+				pLabSortIcon->SetBkImage(_T("material/general/sort02.png"));
+				m_pList->SortItems(CompareASCFunc, NULL);
+			}
+			else if(2 == m_u32SortFlag)
+			{
+				pLabSortIcon->SetBkImage(_T("material/general/sort01.png"));
+				m_pList->SortItems(CompareDESCFunc, NULL);
+			}
+			else if(3 == m_u32SortFlag)
+			{
+				pLabSortIcon->SetBkImage(_T("material/general/sort03.png"));
+				m_pList->SortItems(CompareOnlineFunc, NULL);
+			}
+			else
+				m_u32SortFlag = 0;
+			m_u32SortFlag++;
+		}
+	}
 
 }
 void CWorkstationFrame::OnFinalMessage(HWND hWnd)
@@ -813,6 +886,7 @@ void CWorkstationFrame::OnDel()
 	{
 		Util::Log::Error(_T("MZSkin"), _T("[error]删除工作站的时，发送同步数据命令出错\r\n"));
 	}
+	event::UpdateStatusBar().run();
 //	::PostMessage(m_hWnd, UW_LOADWORKSTATION_MSG, NULL, NULL);
 }
 void CWorkstationFrame::OnDisable()

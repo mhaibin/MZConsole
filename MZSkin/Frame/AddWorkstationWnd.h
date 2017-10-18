@@ -73,6 +73,8 @@ private:
 	HWND			m_hParentWnd;	//¸¸´°¿Ú¾ä±ú;
 	CString			m_strError;
 
+	map<CString, INT32> m_WksSize;
+
 private:
 	CResolutionWHListFrame *m_pPDI;
 	CResolutionWHListFrame *m_pServerNameList;
