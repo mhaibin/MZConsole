@@ -86,6 +86,8 @@ void CMainFrame::InitWindow()
 	HICON hIcon = LoadIcon(CPaintManagerUI::GetInstance(), MAKEINTRESOURCE(IDI_ICON_MZ));
 	SetIcon(hIcon, FALSE);
 
+	InitWndRect();
+
 	CString strTray = _T("名智客户端");
 	map<EC_TRAY_ICON, HICON>  mapIcon;
 	mapIcon[UNKNOWN_ICON] = hIcon;
@@ -142,6 +144,9 @@ LRESULT CMainFrame::HandleCustomMessage(UINT uMsg, WPARAM wParam, LPARAM lParam,
 		break;
 	case UM_ISINBORDER_MSG:
 		hr = (LRESULT)Singleton<CBorderdrag>::Instance().IsBorderRect();
+		break;
+	case WM_DISPLAYCHANGE:
+		InitWndRect();
 		break;
 	default:
 		break;
@@ -316,4 +321,28 @@ void CMainFrame::OpenCurDir()
 	Util::String::W_2_Utf8(strDir, strADir);
 	strADir = "Explorer.exe " + strADir;
 	WinExec(strADir, SW_SHOW);
+}
+void CMainFrame::InitWndRect()
+{
+	RECT rt;
+	GetWindowRect(m_hWnd, &rt);
+	LONG lImageWidth = rt.right - rt.left;
+	LONG lImageHeight = rt.bottom - rt.top;
+	if (lImageWidth == 0 || lImageHeight == 0)
+		return;
+
+	//获取屏幕像素	
+	HDC hDC = ::GetDC(NULL); // 获得屏幕设备描述表句柄
+	LONG lScreentWidth = GetDeviceCaps(hDC, HORZRES); // 获取屏幕水平分辨率
+	LONG lScreentHeight = GetDeviceCaps(hDC, VERTRES); // 获取屏幕垂直分辨率
+	::ReleaseDC(NULL, hDC);
+
+	//计算窗口大小
+	LONG lRealWidth = (lImageWidth > lScreentWidth - 0/*IMAGE_SHOW_SPACE_W*/) ? (lScreentWidth - 0/*IMAGE_SHOW_SPACE_W*/) : lImageWidth;
+	LONG lRealHeight = (lImageHeight > lScreentHeight - 0/*IMAGE_SHOW_SPACE_H*/) ? (lScreentHeight - 0/*IMAGE_SHOW_SPACE_H*/) : lImageHeight;
+	lRealWidth = (lRealWidth > 800/*WINDOW_MIN_WIDTH*/) ? lRealWidth : 800/*WINDOW_MIN_WIDTH*/;
+	lRealHeight = (lRealHeight > 600/*WINDOW_MIN_HEIGHT*/) ? lRealHeight : 600/*WINDOW_MIN_HEIGHT*/;
+	::SetWindowPos(m_hWnd, HWND_TOP, 0, 0, lRealWidth, lRealHeight, SWP_NOMOVE);
+	MoveWindow(m_hWnd, 0, 0, lRealWidth, lRealHeight, FALSE);
+	CenterWindow();
 }

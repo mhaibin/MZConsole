@@ -593,13 +593,23 @@ INT32 CAddWorkstationWnd::AddNewWorkstation()
 	itemData.strName = m_EditName->GetText();
 	itemData.strBName = strBName;
 	itemData.strDNSI1 = m_ipDNSI1->GetText();
+	if(0 == itemData.strDNSI1.Compare(_T("0.0.0.0")))
+		itemData.strDNSI1 = _T("");
 	itemData.strDNSI2 = m_ipDNSI2->GetText();
+	if(0 == itemData.strDNSI2.Compare(_T("0.0.0.0")))
+		itemData.strDNSI2 = _T("");
 	itemData.strDPI = pEditCombPDI->GetText();
 	itemData.strFName = m_EditFName->GetText();
 	itemData.strGetway = m_ipGetway->GetText();
+	if(0 == itemData.strGetway.Compare(_T("0.0.0.0")))
+		itemData.strGetway = _T("");
 	itemData.strIP = m_ipStartIP->GetText();
+	if(0 == itemData.strIP.Compare(_T("0.0.0.0")))
+		itemData.strIP = _T("");
 	itemData.strMac = m_EditMac->GetText();
 	itemData.strMask = m_ipMask->GetText();
+	if(0 == itemData.strMask.Compare(_T("0.0.0.0")))
+		itemData.strMask = _T("");
 	itemData.strNumLen = m_EditNumLen->GetText();
 	itemData.strSize = pCombBuffer->GetText();
 	UINT32 nSel = pCombBuffer->GetCurSel();

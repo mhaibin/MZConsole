@@ -619,7 +619,7 @@ void CMzdIOMgr::GetWorkstationMenuDiskInfo(UINT32 u32Num, map<CString, vector<Me
 				{   
 					INT32 nPos = strRet.Find(_T("|"));
 					CString strSrvName = strRet.Left(nPos-1);
-					CString strDiskDir = strRet.Right(strRet.GetLength() - nPos - 1);
+					CString strDiskDir = strRet.Right(strRet.GetLength() - nPos - 2);
 					int iRet = Get_Image_Info(strDiskDir, UI_Get_Server_IP( strSrvName ));
 
 					strDiskDir = strDiskDir + L" " + Get_Image_Size_new(MZDUI_GET_IMAGE(0, "SizeMB") );
@@ -712,7 +712,10 @@ void CMzdIOMgr::SetWorkStationMenuInfo(WorkstationInfo &itemData, map<CString, v
 			if(3 == nIndex && !itor->second[3].strServer.IsEmpty() && !itor->second[3].strPath.IsEmpty())
 				strDiskPath4 = itor->second[0].strServer + _T(" | ") + itor->second[3].strPath;
 		}
-
+		strDiskPath1.Replace(_T("  "), _T(" "));
+		strDiskPath2.Replace(_T("  "), _T(" "));
+		strDiskPath3.Replace(_T("  "), _T(" "));
+		strDiskPath4.Replace(_T("  "), _T(" "));
 		CString strMenu; // 在已有菜单里找相同的
 
 		for ( int MenuID = 0; ; MenuID++ )
@@ -723,7 +726,6 @@ void CMzdIOMgr::SetWorkStationMenuInfo(WorkstationInfo &itemData, map<CString, v
 			BOOL isExistMenu = FALSE;
 			do{
 				if ( MZDUI_GET_MENU(MenuID, "displayName") != strMeunName ) break;
-
 				if (0 != MZDUI_GET_MENU(MenuID, "DskSet1").Compare(strDiskPath1)) break;
 				if (0 != MZDUI_GET_MENU(MenuID, "DskSet2").Compare(strDiskPath2)) break;
 				if (0 != MZDUI_GET_MENU(MenuID, "DskSet3").Compare(strDiskPath3)) break;

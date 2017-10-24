@@ -51,6 +51,8 @@ private:
 	//打开程序所在的目录
 	void OpenCurDir();
 
+	void InitWndRect();
+
 private:
 
 };

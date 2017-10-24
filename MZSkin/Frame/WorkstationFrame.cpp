@@ -559,6 +559,20 @@ void CWorkstationFrame::OnUpdateWorkstationStatus()
 	}
 	//通知主窗口更新状态栏信息
 	event::UpdateStatusBar().run();
+	//更新排序
+	UINT32 u32SortFlag = m_u32SortFlag - 1;
+	if(1 == (u32SortFlag))
+	{
+		m_pList->SortItems(CompareASCFunc, NULL);
+	}
+	else if(2 == u32SortFlag)
+	{
+		m_pList->SortItems(CompareDESCFunc, NULL);
+	}
+	else if(3 == u32SortFlag)
+	{
+		m_pList->SortItems(CompareOnlineFunc, NULL);
+	}
 }
 LRESULT CWorkstationFrame::OnDestroy(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
@@ -1193,6 +1207,7 @@ void CWorkstationFrame::OnWakeUp()
 			Singleton<CMzdIOMgr>::Instance().WakeUpWorkStation(strNum.GetData());
 		}
 	}
+	Singleton<CMzdIOMgr>::Instance().SendUpLoadCmd();
 }
 void CWorkstationFrame::OnLoadWorkstation()
 {
